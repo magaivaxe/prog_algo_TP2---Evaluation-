@@ -21,7 +21,7 @@ class SaveLoadMenager
 	}
 	//-----------------------
 	//---- Save the file ----
-	func save(theData: AnyObject, fileName: String)
+	func saveData(theData: AnyObject, fileName: String)
 	{
 		UserDefaults.standard.set(theData, forKey: fileName)
 	}
