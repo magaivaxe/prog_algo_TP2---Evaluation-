@@ -32,7 +32,7 @@
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Sign In"/>
                                 <connections>
-                                    <segue destination="bSN-CO-azk" kind="presentation" id="vu5-mB-Uik"/>
+                                    <segue destination="bPg-E3-dya" kind="presentation" id="89m-CO-H9L"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -57,7 +57,7 @@
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Ok"/>
                                 <connections>
-                                    <segue destination="bSN-CO-azk" kind="presentation" id="Xyd-Ht-sor"/>
+                                    <segue destination="bPg-E3-dya" kind="presentation" id="iPg-yU-RVI"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -159,6 +159,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Hhn-hg-BuI"/>
+        <segue reference="iPg-yU-RVI"/>
     </inferredMetricsTieBreakers>
 </document>
