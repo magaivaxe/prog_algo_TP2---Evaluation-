@@ -42,7 +42,6 @@
                                         <state key="normal" title="Sign In"/>
                                         <connections>
                                             <action selector="signIn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Gks-Y6-Snn"/>
-                                            <segue destination="bPg-E3-dya" kind="presentation" id="89m-CO-H9L"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -85,6 +84,7 @@
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="TZ0-fo-1ne"/>
                     </view>
                     <connections>
                         <outlet property="buttonCreateAccount" destination="Mdk-Hl-Zpk" id="QUX-sm-hqH"/>
@@ -96,6 +96,7 @@
                         <outlet property="labelTitle" destination="MZn-DV-UGf" id="cEs-5s-99r"/>
                         <outlet property="viewSignIn" destination="KYj-wg-16Y" id="n71-CW-Rut"/>
                         <outlet property="viewSignUp" destination="KrH-gz-e2Q" id="tpa-e7-Z3y"/>
+                        <segue destination="bPg-E3-dya" kind="show" identifier="segueApp" id="FEm-gF-4YI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -196,6 +197,7 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="VtY-t3-MAm"/>
                     </view>
                     <connections>
                         <outlet property="buttonSignUp" destination="LMn-ym-fRI" id="1X0-dE-dEc"/>
@@ -309,6 +311,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="SrN-Uu-bTL"/>
+        <segue reference="Ipu-Qy-TNM"/>
     </inferredMetricsTieBreakers>
 </document>

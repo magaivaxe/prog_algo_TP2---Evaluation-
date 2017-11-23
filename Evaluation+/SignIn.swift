@@ -26,7 +26,6 @@ class SignIn: UIViewController
 	
 	@IBOutlet weak var buttonSignIn: UIButton!
 	@IBOutlet weak var buttonCreateAccount: UIButton!
-	
 	//-------------------------------
 	
 	//----------- var/let -----------
@@ -46,7 +45,7 @@ class SignIn: UIViewController
 		
 		
 	}
-
+	//============================== Actions Buttons ==============================
 	@IBAction func signIn(_ sender: UIButton)
 	{
 		let checkLoad = SaveLoadMenager()
@@ -60,20 +59,42 @@ class SignIn: UIViewController
 			
 			if userData.2 == password
 			{
-				//code to pass to the next view
+				performSegue(withIdentifier: "segueApp", sender: nil)			// code to performe the present modaly by button
+			}
+			else
+			{
+				//alert to try again
 			}
 		}
 		else
 		{
-			//alert
+			//alert to Sign Up
 		}
+	}
+	//=============================================================================
+
+	//================================= Functions =================================
+	
+	func alert(title t: String,
+	           message m: String)
+	{
+		//- Alerts -
+		let alert = UIAlertController(title: t,
+		                              message: m,
+		                              preferredStyle: UIAlertControllerStyle.alert)
+		//----------
 		
-		
-		
+		//- Buttons -
+		alert.addAction(UIAlertAction(title: "OK",
+		                              style: UIAlertActionStyle.default,
+		                              handler: { (action) in alert.dismiss(animated: true,
+		                                                                   completion: nil)}))
+		//-----------
+		self.present(alert, animated: true, completion: nil)
 	}
 	
-
-
+	
+	//=============================================================================
 }
 
 
