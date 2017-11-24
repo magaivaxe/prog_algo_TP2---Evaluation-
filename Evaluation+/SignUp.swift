@@ -51,6 +51,8 @@ class SignUp: UIViewController
 	{
 		let save = SaveLoadMenager()
 		
+		//conditions to save the user
+		
 		identification = Int(fieldConcoIdentification.text!)
 		username = fieldUsername.text!
 		emailAddress = fieldEmailAddress.text!
