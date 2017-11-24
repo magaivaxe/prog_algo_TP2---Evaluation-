@@ -81,16 +81,18 @@ class SignIn: UIViewController
 		//- Alerts -
 		let alert = UIAlertController(title: t,
 		                              message: m,
-		                              preferredStyle: UIAlertControllerStyle.alert)
+		                              preferredStyle: UIAlertControllerStyle.alert)						// Constant wich go to show message and title alert
 		//----------
 		
 		//- Buttons -
 		alert.addAction(UIAlertAction(title: "OK",
 		                              style: UIAlertActionStyle.default,
 		                              handler: { (action) in alert.dismiss(animated: true,
-		                                                                   completion: nil)}))
+		                                                                   completion: nil)}))			 //alert button
 		//-----------
-		self.present(alert, animated: true, completion: nil)
+		self.present(alert,
+					 animated: true,
+					 completion: nil)
 	}
 	
 	

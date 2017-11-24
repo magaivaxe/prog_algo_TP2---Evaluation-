@@ -56,9 +56,9 @@ class SignUp: UIViewController
 		emailAddress = fieldEmailAddress.text!
 		password = fieldPassword.text!
 		
-		let userData = (identification, emailAddress, password)
+		let userData = (identification, emailAddress, password)					//Tuple of data User
 		
-		save.saveData(theData: userData as AnyObject, fileName: username)
+		save.saveData(theData: userData as AnyObject, fileName: username)		//Tuple save by username file
 	}
 	
 	
