@@ -1,5 +1,5 @@
 /*
-  ViewController.swift
+  SignIn.swift
   Evaluation+
 
   Created by Marcos Gomes on 17-11-22.
@@ -63,19 +63,25 @@ class SignIn: UIViewController, UITextFieldDelegate
 			}
 			else
 			{
-				alert(title: "Wrong password!", message: "Enter the correct password.", tag: 1)
+				alert1(title: "Wrong password!",
+					   message: "Enter the correct password.", tag: 1)
+				fieldPassword.text?.removeAll()
+				return
 			}
 		}
 		else
 		{
-			alert(title: "Username does not exist!", message: "Try create an account.", tag: 2)
+			alert2(title: "Username does not exist!",
+				   message: "Try create an account. Do you want create it?", tag: 2)
 		}
 	}
 	//=============================================================================
 
 	//================================= Functions =================================
 	
-	func alert(title t: String,
+	//--------------- Alerts 1 ----------------
+	
+	func alert1(title t: String,
 	           message m: String,
 			   tag: Int)
 	{
@@ -83,30 +89,55 @@ class SignIn: UIViewController, UITextFieldDelegate
 		let alert = UIAlertController(title: t,
 		                              message: m,
 		                              preferredStyle: UIAlertControllerStyle.alert)						// Constant wich go to show message and title alert
-		//----------
 		
 		//- Buttons -
 		alert.addAction(UIAlertAction(title: "OK",
 		                              style: UIAlertActionStyle.default,
 		                              handler: { (action) in
+										
+			alert.dismiss(animated: true, completion: nil)
+		}))
+	
+		self.present(alert, animated: true, completion: nil)
+	}
+	//------------------------------------------
+	
+	//--------------- Alerts 2 -----------------
+	func alert2(title t: String,
+				message m: String,
+				tag: Int)
+	{
+		//- Alerts -
+		let alert = UIAlertController(title: t,
+									  message: m,
+									  preferredStyle: UIAlertControllerStyle.alert)						// Constant wich go to show message and title alert
+
+		//- Buttons -
+		alert.addAction(UIAlertAction(title: "Yes",
+									  style: UIAlertActionStyle.default,
+									  handler: { (action) in
+										
+			alert.dismiss(animated: true, completion: nil)
+			
+			self.performSegue(withIdentifier: "segueSignUpAlert", sender: nil)
+		}))
+		
+		alert.addAction(UIAlertAction(title: "No",
+									  style: UIAlertActionStyle.default,
+									  handler: { (action) in
 			alert.dismiss(animated: true, completion: nil)
 										
-			if tag == 2
-			{
-				self.performSegue(withIdentifier: "segueSignUpAlert", sender: nil)
-			}
-										
-		}))			 //alert button
-		//-----------
-		self.present(alert,
-					 animated: true,
-					 completion: nil)
+			self.fieldUsername.text?.removeAll()
+			self.fieldPassword.text?.removeAll()
+		}))
+
+		self.present(alert, animated: true, completion: nil)
 	}
-	
+	//-----------------------------------------
 	
 	//=============================================================================
 	
-	//================================== Keyboard =================================
+	//============================ Keyboard fonctions =============================
 	
 	//----- Touches begin anything -----
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
@@ -115,7 +146,6 @@ class SignIn: UIViewController, UITextFieldDelegate
 	}
 	//----------------------------------
 	
-	
 	//------ Field should return -------
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool
 	{
@@ -123,6 +153,7 @@ class SignIn: UIViewController, UITextFieldDelegate
 		
 		return true
 	}
+	//----------------------------------
 	
 	//=============================================================================
 }

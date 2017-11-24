@@ -89,9 +89,6 @@ class SignUp: UIViewController, UITextFieldDelegate
 		
 	}
 	
-	
-	
-	
 	//================================= Functions =================================
 	
 	//----------- Alerts Fonctions ------------
@@ -146,6 +143,7 @@ class SignUp: UIViewController, UITextFieldDelegate
 		self.present(alert, animated: true, completion: nil)
 	}
 	//-------------------------------------------
+	
 	//=============================================================================
 	
 	//================================== Keyboard =================================
