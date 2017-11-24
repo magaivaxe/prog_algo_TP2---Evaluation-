@@ -11,7 +11,7 @@ import UIKit
 //-------------------------------
 
 
-class SignIn: UIViewController
+class SignIn: UIViewController, UITextFieldDelegate
 {
 	//----------- Outlets -----------
 	@IBOutlet weak var imgViewLogo: UIImageView!
@@ -55,20 +55,20 @@ class SignIn: UIViewController
 		
 		if checkLoad.checkExistingSaves(fileName: username) == true
 		{
-			let userData = checkLoad.loadData(fileName: username) as! (Int, String, String)
+			let userData = checkLoad.loadData(fileName: username) as! [String]
 			
-			if userData.2 == password
+			if userData[2] == password
 			{
 				performSegue(withIdentifier: "segueApp", sender: nil)			// code to performe the present modaly by button
 			}
 			else
 			{
-				//alert to try again
+				alert(title: "Wrong password!", message: "Enter the correct password.", tag: 1)
 			}
 		}
 		else
 		{
-			//alert to Sign Up
+			alert(title: "Username does not exist!", message: "Try create an account.", tag: 2)
 		}
 	}
 	//=============================================================================
@@ -76,7 +76,8 @@ class SignIn: UIViewController
 	//================================= Functions =================================
 	
 	func alert(title t: String,
-	           message m: String)
+	           message m: String,
+			   tag: Int)
 	{
 		//- Alerts -
 		let alert = UIAlertController(title: t,
@@ -87,14 +88,41 @@ class SignIn: UIViewController
 		//- Buttons -
 		alert.addAction(UIAlertAction(title: "OK",
 		                              style: UIAlertActionStyle.default,
-		                              handler: { (action) in alert.dismiss(animated: true,
-		                                                                   completion: nil)}))			 //alert button
+		                              handler: { (action) in
+			alert.dismiss(animated: true, completion: nil)
+										
+			if tag == 2
+			{
+				self.performSegue(withIdentifier: "segueSignUpAlert", sender: nil)
+			}
+										
+		}))			 //alert button
 		//-----------
 		self.present(alert,
 					 animated: true,
 					 completion: nil)
 	}
 	
+	
+	//=============================================================================
+	
+	//================================== Keyboard =================================
+	
+	//----- Touches begin anything -----
+	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
+	{
+		self.view.endEditing(true)
+	}
+	//----------------------------------
+	
+	
+	//------ Field should return -------
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool
+	{
+		textField.resignFirstResponder()
+		
+		return true
+	}
 	
 	//=============================================================================
 }
