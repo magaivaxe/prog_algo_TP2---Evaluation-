@@ -42,7 +42,7 @@ class SignUp: UIViewController, UITextFieldDelegate
         super.viewDidLoad()
 		
 		//----------- Classes -----------
-		let style = Styles()
+		//let style = Styles()
 		//-------------------------------
 		
     }

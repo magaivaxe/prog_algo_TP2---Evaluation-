@@ -10,8 +10,8 @@
 import UIKit
 //-------------------------------
 
-
-class SignIn: UIViewController, UITextFieldDelegate
+class SignIn: UIViewController,
+			  UITextFieldDelegate
 {
 	//----------- Outlets -----------
 	@IBOutlet weak var imgViewLogo: UIImageView!
@@ -37,12 +37,9 @@ class SignIn: UIViewController, UITextFieldDelegate
 	{
 		super.viewDidLoad()
 		
-		
 		//----------- Classes -----------
-		let style = Styles()
+		//let style = Styles()
 		//-------------------------------
-		
-		
 		
 	}
 	//============================== Actions Buttons ==============================
