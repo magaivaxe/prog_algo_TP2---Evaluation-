@@ -181,7 +181,6 @@ class MainChoices: UIViewController,
 	//=============================================================================
 	
 	//================================ Table View =================================
-	
 	//--------- Cells number --------
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
@@ -196,7 +195,6 @@ class MainChoices: UIViewController,
 		}
 	}
 	//-------------------------------
-	
 	//------- Cells contents --------
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
@@ -215,6 +213,16 @@ class MainChoices: UIViewController,
 		return cell
 	}
 	//-------------------------------
+	
+	func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath)
+	{
+		<#code#>
+	}
+	
+	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath)
+	{
+		<#code#>
+	}
 	//=============================================================================
 }
 
