@@ -27,7 +27,6 @@ class MainChoices: UIViewController,
 	@IBOutlet weak var seg_students_disciplines: UISegmentedControl!
 	@IBOutlet weak var table_view: UITableView!
 	//-------------------------------
-	
 	//---------- Variables ----------
 	var arrayStudents: [String]!; var arrayDisciplines: [String]!
 	var sortedArrayStudents: [String]!; var sortedArrayDisciplines: [String]!
@@ -53,7 +52,6 @@ class MainChoices: UIViewController,
 
     }
 	//================================= Buttons ===================================
-	
 	//---------- Sign Out -----------
 	@IBAction func sign_out(_ sender: UIButton)
 	{
@@ -62,7 +60,6 @@ class MainChoices: UIViewController,
 			  tag: 2)
 	}
 	//-------------------------------
-	
 	//------------- Add -------------
 	@IBAction func search_student_discipline(_ sender: UIButton)
 	{
@@ -97,9 +94,7 @@ class MainChoices: UIViewController,
 		table_view.reloadData()
 	}
 	//-------------------------------
-	
 	//=============================================================================
-	
 	//=============================== Seg Control =================================
 	@IBAction func show_students_disciplines(_ sender: UISegmentedControl)
 	{
@@ -114,9 +109,7 @@ class MainChoices: UIViewController,
 		table_view.reloadData()
 	}
 	//=============================================================================
-	
 	//================================ Functions ==================================
-	
 	//------------ Alerts -----------
 	func alert(title t: String,
 			   message m: String,
@@ -154,7 +147,6 @@ class MainChoices: UIViewController,
 		self.present(alert, animated: true, completion: nil)
 	}
 	//-------------------------------
-	
 	//--------- Load/Check ----------
 	func load_check()
 	{
@@ -175,7 +167,17 @@ class MainChoices: UIViewController,
 		table_view.reloadData()
 	}
 	//-------------------------------
+	//---------- Keyboard -----------
+	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
+	{
+		self.view.endEditing(true)
+	}
 	
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool
+	{
+		textField.resignFirstResponder(); return true
+	}
+	//-------------------------------
 	//=============================================================================
 	
 	//================================ Table View =================================
@@ -184,13 +186,9 @@ class MainChoices: UIViewController,
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
 	{
-		if seg_students_disciplines.selectedSegmentIndex == 0 || add_student.tag == 1
+		if seg_students_disciplines.selectedSegmentIndex == 0
 		{
 			return arrayStudents.count
-		}
-		else if seg_students_disciplines.selectedSegmentIndex == 1 || add_discipline.tag == 2
-		{
-			return arrayDisciplines.count
 		}
 		else
 		{
@@ -205,7 +203,7 @@ class MainChoices: UIViewController,
 		let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.default,
 													reuseIdentifier: nil)
 		
-		if seg_students_disciplines.selectedSegmentIndex == 0 || add_student.tag == 1
+		if seg_students_disciplines.selectedSegmentIndex == 0
 		{
 			cell.textLabel?.text = "\(arrayStudents[indexPath.row])"
 		}
