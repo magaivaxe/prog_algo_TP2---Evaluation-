@@ -47,7 +47,7 @@ class MainChoices: UIViewController,
 		//----
 		//faire un objet sorted pour les array
 		//----
-		
+		seg_students_disciplines.selectedSegmentIndex = 0
 		//----
 
     }
@@ -91,7 +91,7 @@ class MainChoices: UIViewController,
 		save.saveData(theData: arrayStudents as AnyObject, fileName: "studentsData")
 		save.saveData(theData: arrayDisciplines as AnyObject, fileName: "disciplinesData")
 		
-		table_view.reloadData()
+		sorted()
 	}
 	//-------------------------------
 	//=============================================================================
@@ -100,17 +100,24 @@ class MainChoices: UIViewController,
 	{
 		if sender.selectedSegmentIndex == 0		/* Students */
 		{
-			sortedArrayStudents = arrayStudents.sorted()
+			sorted()
 		}
 		else									/* Disciplines */
 		{
-			sortedArrayDisciplines = arrayDisciplines.sorted()
+			sorted()
 		}
-		table_view.reloadData()
 	}
 	//=============================================================================
 	//================================ Functions ==================================
-	//------------ Alerts -----------
+	//------------ Sorted -----------
+    func sorted()
+    {
+        sortedArrayStudents = arrayStudents.sorted()
+        sortedArrayDisciplines = arrayDisciplines.sorted()
+        
+        table_view.reloadData()
+    }
+    //------------ Alerts -----------
 	func alert(title t: String,
 			   message m: String,
 			   tag: Int)
@@ -164,7 +171,7 @@ class MainChoices: UIViewController,
 			load.saveData(theData: arrayStudents as AnyObject, fileName: "studentsData")
 			load.saveData(theData: arrayDisciplines as AnyObject, fileName: "disciplinesData")
 		}
-		table_view.reloadData()
+		sorted()
 	}
 	//-------------------------------
 	//---------- Keyboard -----------
@@ -187,11 +194,11 @@ class MainChoices: UIViewController,
 	{
 		if seg_students_disciplines.selectedSegmentIndex == 0
 		{
-			return arrayStudents.count
+			return sortedArrayStudents.count
 		}
 		else
 		{
-			return arrayDisciplines.count
+			return sortedArrayDisciplines.count
 		}
 	}
 	//-------------------------------
@@ -204,11 +211,11 @@ class MainChoices: UIViewController,
 		
 		if seg_students_disciplines.selectedSegmentIndex == 0		/* Students */
 		{
-			cell.textLabel?.text = "\(arrayStudents[indexPath.row])"
+			cell.textLabel?.text = "\(sortedArrayStudents[indexPath.row])"
 		}
 		else														/* Disciplines */
 		{
-			cell.textLabel?.text = "\(arrayDisciplines[indexPath.row])"
+			cell.textLabel?.text = "\(sortedArrayDisciplines[indexPath.row])"
 		}
 		return cell
 	}
@@ -221,14 +228,14 @@ class MainChoices: UIViewController,
 		
 		if seg_students_disciplines.selectedSegmentIndex == 0		/* Students */
 		{
-			let student = [String](arrayStudents)[indexPath.row]
+			let student = [String](sortedArrayStudents)[indexPath.row]
 			save.saveData(theData: student as AnyObject, fileName: "student")
 			
 			performSegue(withIdentifier: "segueStudent", sender: nil)
 		}
 		else														/* Disciplines */
 		{
-			let discipline = [String](arrayDisciplines)[indexPath.row]
+			let discipline = [String](sortedArrayDisciplines)[indexPath.row]
 			save.saveData(theData: discipline as AnyObject, fileName: "discipline")
 		}
 		
@@ -243,22 +250,42 @@ class MainChoices: UIViewController,
 		
 		if seg_students_disciplines.selectedSegmentIndex == 0		/* Delete students rows */
 		{
-			if editingStyle == UITableViewCellEditingStyle.delete	/* Conditions to delete */
+			if editingStyle == UITableViewCellEditingStyle.delete	/* Conditions to delete the sorted and normal arrays */
 			{
-				arrayStudents.remove(at: indexPath.row)
+                var i = 0; while i < arrayStudents.count
+                {
+                    if sortedArrayStudents[indexPath.row] == arrayStudents[i]
+                    {
+                        sortedArrayStudents.remove(at: indexPath.row)
+                        arrayStudents.remove(at: i)
+                        save.saveData(theData: arrayStudents as AnyObject, fileName: "studentsData")
+                        tableView.deleteRows(at: [indexPath as IndexPath], with: UITableViewRowAnimation.automatic)
+                        tableView.reloadData()
+                        return
+                    }
+                    i = i + 1
+                }
 			}
-			save.saveData(theData: arrayStudents as AnyObject, fileName: "studentsData")
 		}
 		else														/* Delete Disciplines rows */
 		{
 			if editingStyle == UITableViewCellEditingStyle.delete
 			{
-				arrayDisciplines.remove(at: indexPath.row)
+                var j = 0; while j < arrayDisciplines.count
+                {
+                    if sortedArrayDisciplines[indexPath.row] == arrayDisciplines[j]
+                    {
+                        sortedArrayDisciplines.remove(at: indexPath.row)
+                        arrayDisciplines.remove(at: j)
+                        save.saveData(theData: arrayDisciplines as AnyObject, fileName: "disciplinesData")
+                        tableView.deleteRows(at: [indexPath as IndexPath], with: UITableViewRowAnimation.automatic)
+                        tableView.reloadData()
+                        return
+                    }
+                    j = j + 1
+                }
 			}
-			save.saveData(theData: arrayDisciplines as AnyObject, fileName: "disciplinesData")
 		}
-		tableView.deleteRows(at: [indexPath as IndexPath],
-							 with: UITableViewRowAnimation.automatic)
 	}
 	//-------------------------------
 	//=============================================================================
