@@ -441,21 +441,22 @@
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Sign Out"/>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="presentation" id="Ipu-Qy-TNM"/>
+                                    <action selector="sign_out:" destination="bSN-CO-azk" eventType="touchUpInside" id="dbq-J4-Pj1"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Student name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eGu-r8-oT6">
-                                <rect key="frame" x="16" y="58" width="239" height="30"/>
+                            <textField opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Student name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eGu-r8-oT6">
+                                <rect key="frame" x="16" y="58" width="277" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
+                                    <action selector="show_students_disciplines_names:" destination="bSN-CO-azk" eventType="touchUpInside" id="Xlh-4G-GRv"/>
                                     <outlet property="delegate" destination="bSN-CO-azk" id="utG-CF-S3p"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Discipline name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q2g-jk-9G5">
-                                <rect key="frame" x="16" y="96" width="239" height="30"/>
+                            <textField opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Discipline name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q2g-jk-9G5">
+                                <rect key="frame" x="16" y="96" width="277" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -473,7 +474,7 @@
                                     <outlet property="delegate" destination="bSN-CO-azk" id="nBW-eB-rai"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hdL-vq-fMa" userLabel="Add student">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hdL-vq-fMa" userLabel="Add student">
                                 <rect key="frame" x="301" y="58" width="58" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -482,7 +483,7 @@
                                     <action selector="search_student_discipline:" destination="bSN-CO-azk" eventType="touchUpInside" id="pHb-pZ-N7Z"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZAe-js-stU" userLabel="Add discipline">
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZAe-js-stU" userLabel="Add discipline">
                                 <rect key="frame" x="301" y="96" width="58" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -490,20 +491,22 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="QaZ-es-4GV"/>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="search" id="MWH-Sp-Z4e"/>
                     <connections>
                         <outlet property="add_discipline" destination="ZAe-js-stU" id="qct-gY-fx2"/>
                         <outlet property="add_student" destination="hdL-vq-fMa" id="8wg-DK-ejt"/>
-                        <outlet property="discipline_name" destination="Q2g-jk-9G5" id="Lff-nJ-ggr"/>
+                        <outlet property="field_discipline_name" destination="Q2g-jk-9G5" id="cng-p4-oFP"/>
+                        <outlet property="field_student_name" destination="eGu-r8-oT6" id="3Eo-RU-vKa"/>
                         <outlet property="sign_out" destination="D1d-Py-nEY" id="Wbw-rd-yw1"/>
-                        <outlet property="student_name" destination="eGu-r8-oT6" id="0N5-iB-7dq"/>
                         <outlet property="table_view" destination="5QH-8f-uDS" id="kAp-DZ-qqq"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="signOut" id="bXb-Of-aYw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xcJ-c0-9ij" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="220" y="-561"/>
+            <point key="canvasLocation" x="215" y="-597"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="cWi-FU-QQb">
@@ -527,6 +530,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="SYD-fn-cLJ"/>
-        <segue reference="Ipu-Qy-TNM"/>
+        <segue reference="bXb-Of-aYw"/>
     </inferredMetricsTieBreakers>
 </document>

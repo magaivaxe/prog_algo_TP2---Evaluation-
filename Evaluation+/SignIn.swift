@@ -37,10 +37,6 @@ class SignIn: UIViewController,
 	{
 		super.viewDidLoad()
 		
-		//----------- Classes -----------
-		//let style = Styles()
-		//-------------------------------
-		
 	}
 	//============================== Actions Buttons ==============================
 	@IBAction func signIn(_ sender: UIButton)

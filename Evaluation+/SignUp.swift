@@ -40,11 +40,6 @@ class SignUp: UIViewController, UITextFieldDelegate
     override func viewDidLoad()
 	{
         super.viewDidLoad()
-		
-		//----------- Classes -----------
-		//let style = Styles()
-		//-------------------------------
-		
     }
 
 	@IBAction func SignUp(_ sender: UIButton)
