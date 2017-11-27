@@ -135,7 +135,7 @@ class MainChoices: UIViewController,
 										  handler: { (action) in
 				alert.dismiss(animated: true, completion: nil)
 											
-				self.performSegue(withIdentifier: "signOut", sender: nil)
+				self.performSegue(withIdentifier: "signOut", sender: nil) 			/* Performe to signOut */
 			}))
 			
 			alert.addAction(UIAlertAction(title: "No",
@@ -148,7 +148,7 @@ class MainChoices: UIViewController,
 	}
 	//-------------------------------
 	//--------- Load/Check ----------
-	func load_check()
+	func load_check()								/* Load or create the first files */
 	{
 		let load = SaveLoadMenager()
 		
@@ -168,22 +168,22 @@ class MainChoices: UIViewController,
 	}
 	//-------------------------------
 	//---------- Keyboard -----------
-	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
+	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)	/* Touche on view to hide keyboard */
 	{
 		self.view.endEditing(true)
 	}
 	
-	func textFieldShouldReturn(_ textField: UITextField) -> Bool
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool				/* Return hide the keyboard */
 	{
 		textField.resignFirstResponder(); return true
 	}
 	//-------------------------------
 	//=============================================================================
-	
 	//================================ Table View =================================
 	//--------- Cells number --------
 	
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+	func tableView(_ tableView: UITableView,								/* Number of rows */
+				   numberOfRowsInSection section: Int) -> Int
 	{
 		if seg_students_disciplines.selectedSegmentIndex == 0
 		{
@@ -196,33 +196,71 @@ class MainChoices: UIViewController,
 	}
 	//-------------------------------
 	//------- Cells contents --------
-	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+	func tableView(_ tableView: UITableView,
+				   cellForRowAt indexPath: IndexPath) -> UITableViewCell	/* Rows contents */
 	{
 		let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.default,
 													reuseIdentifier: nil)
 		
-		if seg_students_disciplines.selectedSegmentIndex == 0
+		if seg_students_disciplines.selectedSegmentIndex == 0		/* Students */
 		{
 			cell.textLabel?.text = "\(arrayStudents[indexPath.row])"
 		}
-		else
+		else														/* Disciplines */
 		{
 			cell.textLabel?.text = "\(arrayDisciplines[indexPath.row])"
 		}
-		
 		return cell
 	}
 	//-------------------------------
-	
-	func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath)
+	//-------- Select cells ---------
+	func tableView(_ tableView: UITableView,
+				   didDeselectRowAt indexPath: IndexPath)			/* Rows selections */
 	{
-		<#code#>
+		let save = SaveLoadMenager()
+		
+		if seg_students_disciplines.selectedSegmentIndex == 0		/* Students */
+		{
+			let student = [String](arrayStudents)[indexPath.row]
+			save.saveData(theData: student as AnyObject, fileName: "student")
+			
+			performSegue(withIdentifier: "segueStudent", sender: nil)
+		}
+		else														/* Disciplines */
+		{
+			let discipline = [String](arrayDisciplines)[indexPath.row]
+			save.saveData(theData: discipline as AnyObject, fileName: "discipline")
+		}
+		
 	}
-	
-	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath)
+	//-------------------------------
+	//-------- Delete Cells ---------
+	func tableView(_ tableView: UITableView,
+				   commit editingStyle: UITableViewCellEditingStyle,
+				   forRowAt indexPath: IndexPath)					/* Rows delete */
 	{
-		<#code#>
+		let save = SaveLoadMenager()
+		
+		if seg_students_disciplines.selectedSegmentIndex == 0		/* Delete students rows */
+		{
+			if editingStyle == UITableViewCellEditingStyle.delete	/* Conditions to delete */
+			{
+				arrayStudents.remove(at: indexPath.row)
+			}
+			save.saveData(theData: arrayStudents as AnyObject, fileName: "studentsData")
+		}
+		else														/* Delete Disciplines rows */
+		{
+			if editingStyle == UITableViewCellEditingStyle.delete
+			{
+				arrayDisciplines.remove(at: indexPath.row)
+			}
+			save.saveData(theData: arrayDisciplines as AnyObject, fileName: "disciplinesData")
+		}
+		tableView.deleteRows(at: [indexPath as IndexPath],
+							 with: UITableViewRowAnimation.automatic)
 	}
+	//-------------------------------
 	//=============================================================================
 }
 

@@ -516,6 +516,7 @@
                         <outlet property="sign_out" destination="D1d-Py-nEY" id="Wbw-rd-yw1"/>
                         <outlet property="table_view" destination="5QH-8f-uDS" id="kAp-DZ-qqq"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="signOut" id="bXb-Of-aYw"/>
+                        <segue destination="Yy4-Zb-bvF" kind="show" identifier="segueStudent" id="zIR-Qv-F56"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xcJ-c0-9ij" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -543,6 +544,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="zIR-Qv-F56"/>
         <segue reference="SYD-fn-cLJ"/>
         <segue reference="bXb-Of-aYw"/>
     </inferredMetricsTieBreakers>
