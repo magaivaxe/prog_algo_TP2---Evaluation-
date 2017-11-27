@@ -451,7 +451,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <action selector="show_students_disciplines_names:" destination="bSN-CO-azk" eventType="touchUpInside" id="Xlh-4G-GRv"/>
                                     <outlet property="delegate" destination="bSN-CO-azk" id="utG-CF-S3p"/>
                                 </connections>
                             </textField>
@@ -488,7 +487,21 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Add"/>
+                                <connections>
+                                    <action selector="search_student_discipline:" destination="bSN-CO-azk" eventType="touchUpInside" id="xuu-iw-PPV"/>
+                                </connections>
                             </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="SmY-Wu-1nk">
+                                <rect key="frame" x="186" y="20" width="173" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="Students"/>
+                                    <segment title="Disciplines"/>
+                                </segments>
+                                <connections>
+                                    <action selector="show_students_disciplines:" destination="bSN-CO-azk" eventType="valueChanged" id="Bn1-zN-PVY"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="QaZ-es-4GV"/>
@@ -499,6 +512,7 @@
                         <outlet property="add_student" destination="hdL-vq-fMa" id="8wg-DK-ejt"/>
                         <outlet property="field_discipline_name" destination="Q2g-jk-9G5" id="cng-p4-oFP"/>
                         <outlet property="field_student_name" destination="eGu-r8-oT6" id="3Eo-RU-vKa"/>
+                        <outlet property="seg_students_disciplines" destination="SmY-Wu-1nk" id="3sg-7b-w0a"/>
                         <outlet property="sign_out" destination="D1d-Py-nEY" id="Wbw-rd-yw1"/>
                         <outlet property="table_view" destination="5QH-8f-uDS" id="kAp-DZ-qqq"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="signOut" id="bXb-Of-aYw"/>
@@ -506,7 +520,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xcJ-c0-9ij" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="215" y="-597"/>
+            <point key="canvasLocation" x="213.59999999999999" y="-597.75112443778119"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="cWi-FU-QQb">

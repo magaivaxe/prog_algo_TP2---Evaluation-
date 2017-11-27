@@ -24,13 +24,15 @@ class MainChoices: UIViewController,
 	@IBOutlet weak var field_student_name: UITextField!
 	@IBOutlet weak var field_discipline_name: UITextField!
 	
+	@IBOutlet weak var seg_students_disciplines: UISegmentedControl!
 	@IBOutlet weak var table_view: UITableView!
 	//-------------------------------
 	
 	//---------- Variables ----------
 	var arrayStudents: [String]!; var arrayDisciplines: [String]!
+	var sortedArrayStudents: [String]!; var sortedArrayDisciplines: [String]!
 	
-	var rows: Int!
+	var tagField: Int!
 	//-------------------------------
 
     override func viewDidLoad()
@@ -69,11 +71,14 @@ class MainChoices: UIViewController,
 		let studentName = field_student_name.text!
 		let disciplineName = field_discipline_name.text!
 		
-		if studentName == "" || disciplineName == ""
+		if ((sender.tag == 1 && studentName == "") ||
+			(sender.tag == 2 && disciplineName == ""))
 		{
 			alert(title: "Blank field!",
 				  message: "Fill the field of students or disciplines.",
 				  tag: 1)
+			
+			return
 		}
 		
 		if sender.tag == 1
@@ -95,20 +100,19 @@ class MainChoices: UIViewController,
 	
 	//=============================================================================
 	
-	//=============================== Text fields =================================
-
-	@IBAction func show_students_disciplines_names(_ sender: UITextField)
+	//=============================== Seg Control =================================
+	@IBAction func show_students_disciplines(_ sender: UISegmentedControl)
 	{
-		if sender.tag == 1			/* Students */
+		if sender.selectedSegmentIndex == 0		/* Students */
 		{
-			
+			sortedArrayStudents = arrayStudents.sorted()
 		}
-		else						/* Disciplines */
+		else									/* Disciplines */
 		{
-			
+			sortedArrayDisciplines = arrayDisciplines.sorted()
 		}
+		table_view.reloadData()
 	}
-	
 	//=============================================================================
 	
 	//================================ Functions ==================================
@@ -147,6 +151,7 @@ class MainChoices: UIViewController,
 				alert.dismiss(animated: true, completion: nil)
 			}))
 		}
+		self.present(alert, animated: true, completion: nil)
 	}
 	//-------------------------------
 	
@@ -179,7 +184,18 @@ class MainChoices: UIViewController,
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
 	{
-		return arrayDisciplines.count
+		if seg_students_disciplines.selectedSegmentIndex == 0 || add_student.tag == 1
+		{
+			return arrayStudents.count
+		}
+		else if seg_students_disciplines.selectedSegmentIndex == 1 || add_discipline.tag == 2
+		{
+			return arrayDisciplines.count
+		}
+		else
+		{
+			return arrayDisciplines.count
+		}
 	}
 	//-------------------------------
 	
@@ -188,6 +204,16 @@ class MainChoices: UIViewController,
 	{
 		let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.default,
 													reuseIdentifier: nil)
+		
+		if seg_students_disciplines.selectedSegmentIndex == 0 || add_student.tag == 1
+		{
+			cell.textLabel?.text = "\(arrayStudents[indexPath.row])"
+		}
+		else
+		{
+			cell.textLabel?.text = "\(arrayDisciplines[indexPath.row])"
+		}
+		
 		return cell
 	}
 	//-------------------------------
