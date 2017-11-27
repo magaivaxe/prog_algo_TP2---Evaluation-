@@ -45,7 +45,7 @@ class MainChoices: UIViewController,
 		//----
 		load_check()	/* Load/check existing files */
 		//----
-		
+		//faire un objet sorted pour les array
 		//----
 		
 		//----
@@ -55,8 +55,8 @@ class MainChoices: UIViewController,
 	//---------- Sign Out -----------
 	@IBAction func sign_out(_ sender: UIButton)
 	{
-		alert(title: "System exit!",
-			  message: "Are you sure to exit the system?",
+		alert(title: "Sign out?!",
+			  message: "Are you sure to quit?",
 			  tag: 2)
 	}
 	//-------------------------------
