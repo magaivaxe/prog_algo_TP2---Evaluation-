@@ -59,11 +59,7 @@ class StudentsGrades: UIViewController,
 	var arrayDisciplines: [String]!
 	var dictStudentGrades: [String:[String:[String]]]!
 	
-	var weight1: Int!
-	var weight2: Int!
-	var weight3: Int!
-	var weight4: Int!
-	var weight5: Int!
+	
 	//-------------------------------
 	//================================ viewDidLoad ================================
     override func viewDidLoad()
@@ -106,13 +102,15 @@ class StudentsGrades: UIViewController,
     
     @IBAction func criterias(_ sender: UISlider)
     {
-		weight1 = Int(field_weight1.text!)
-		weight2 = Int(field_weight2.text!)
-		weight3 = Int(field_weight3.text!)
-		weight4 = Int(field_weight4.text!)
-		weight5 = Int(field_weight5.text!)
+		let calculate = Calculate()
+	
+		let weight1 = Double(field_weight1.text!)
+		let weight2 = Double(field_weight2.text!)
+		let weight3 = Double(field_weight3.text!)
+		let weight4 = Double(field_weight4.text!)
+		let weight5 = Double(field_weight5.text!)
 		
-		let arrayWeights = [weight1, weight2,
+		let arrayWeights: [Double] = [weight1, weight2,
 							weight3, weight4,
 							weight5]
 		var gradeOn: Int!
@@ -154,7 +152,9 @@ class StudentsGrades: UIViewController,
 			gradeOn = 30
 			if seg_grades.selectedSegmentIndex == 0			/* Grade 1 */
 			{
-				//arrayGrades[0] = 
+				arrayGrades[0] = calculate.totalGradeWithWeight(criterias: arrayCriterias,
+																weights: arrayWeights,
+																gradeOn: <#T##Int#>)
 			}
 			else if seg_grades.selectedSegmentIndex == 1	/* Grade 2 */
 			{
