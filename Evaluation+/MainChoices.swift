@@ -221,25 +221,30 @@ class MainChoices: UIViewController,
 	}
 	//-------------------------------
 	//-------- Select cells ---------
-	func tableView(_ tableView: UITableView,
-				   didDeselectRowAt indexPath: IndexPath)			/* Rows selections */
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
 	{
 		let save = SaveLoadMenager()
 		
-		if seg_students_disciplines.selectedSegmentIndex == 0		/* Students */
+		tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.checkmark
+		
+		if tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCellAccessoryType.checkmark
 		{
 			let student = [String](sortedArrayStudents)[indexPath.row]
 			save.saveData(theData: student as AnyObject, fileName: "student")
 			
-			performSegue(withIdentifier: "segueStudent", sender: nil)
+			if sortedArrayDisciplines != [String]()
+			{
+				performSegue(withIdentifier: "segueStudent", sender: nil)
+			}
+			else
+			{
+				alert(title: "No disciplines!", message: "Add disciplines to continue.", tag: 1)
+				
+				tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.none
+			}
 		}
-		else														/* Disciplines */
-		{
-			let discipline = [String](sortedArrayDisciplines)[indexPath.row]
-			save.saveData(theData: discipline as AnyObject, fileName: "discipline")
-		}
-		
 	}
+
 	//-------------------------------
 	//-------- Delete Cells ---------
 	func tableView(_ tableView: UITableView,
