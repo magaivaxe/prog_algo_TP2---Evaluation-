@@ -112,11 +112,49 @@ class StudentsGrades: UIViewController,
 		weight4 = Int(field_weight4.text!)
 		weight5 = Int(field_weight5.text!)
 		
+		let arrayWeights = [weight1, weight2,
+							weight3, weight4,
+							weight5]
+		var gradeOn: Int!
+		var criteria1: Double!
+		var criteria2: Double!
+		var criteria3: Double!
+		var criteria4: Double!
+		var criteria5: Double!
+		
+		var arrayCriterias: [Double]!
+		var arrayGrades: [Double]!
+		
+		switch sender.tag
+		{
+		case 0:
+			criteria1 = Double(sender.value)
+			break
+		case 1:
+			criteria2 = Double(sender.value)
+			break
+		case 2:
+			criteria3 = Double(sender.value)
+			break
+		case 3:
+			criteria4 = Double(sender.value)
+			break
+		case 4:
+			criteria5 = Double(sender.value)
+			break
+		default:
+			break
+		}
+		arrayCriterias = [criteria1, criteria2,
+						  criteria3, criteria4,
+						  criteria5]
+	
 		if switch_grade.isOn == false					/* Grade on 30 */
 		{
+			gradeOn = 30
 			if seg_grades.selectedSegmentIndex == 0			/* Grade 1 */
 			{
-				
+				//arrayGrades[0] = 
 			}
 			else if seg_grades.selectedSegmentIndex == 1	/* Grade 2 */
 			{
@@ -129,6 +167,7 @@ class StudentsGrades: UIViewController,
 		}
 		else											/* Grade on 100 */
 		{
+			gradeOn = 100
 			if seg_grades.selectedSegmentIndex == 0			/* Grade 1 */
 			{
 				
