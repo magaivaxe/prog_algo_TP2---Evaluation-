@@ -59,7 +59,7 @@ class StudentsGrades: UIViewController,
 	var arrayDisciplines: [String]!
 	var dictStudentGrades = [String:[String:[Double]]]()
 	
-	var currentDiscipline: String!
+	var currentDiscipline: String?
 	var arrayGrades = [Double]()
 	var arrayWeights: [Double]!
 	var arrayCriterias: [Double]!
@@ -201,18 +201,24 @@ class StudentsGrades: UIViewController,
     
     @IBAction func go_classrooms(_ sender: UIButton)
     {
-		let calculate = Calculate()
-		let save = SaveLoadMenager()
-		
-		weight1 = Double(field_weight1.text!)!
-		weight2 = Double(field_weight2.text!)!
-		weight3 = Double(field_weight3.text!)!
-		weight4 = Double(field_weight4.text!)!
-		weight5 = Double(field_weight5.text!)!
-		
-		arrayWeights = [weight1, weight2, weight3, weight4, weight5]
-		arrayCriterias = [criteria1, criteria2, criteria3, criteria4, criteria5]
-		
+        let calculate = Calculate()
+        let save = SaveLoadMenager()
+        
+        weight1 = Double(field_weight1.text!)!; weight2 = Double(field_weight2.text!)!
+        weight3 = Double(field_weight3.text!)!; weight4 = Double(field_weight4.text!)!
+        weight5 = Double(field_weight5.text!)!
+        
+        arrayWeights = [weight1, weight2, weight3, weight4, weight5]
+        arrayCriterias = [criteria1, criteria2, criteria3, criteria4, criteria5]
+        
+        if currentDiscipline == nil
+        {
+            alert(title: "Warning",
+                  message: "You must choose the course!",
+                  tag: 2)
+            return
+        }
+        
 		if switch_grade.isOn == false					/* Grade on 30 */
 		{
 			gradeOn = 30
@@ -225,15 +231,15 @@ class StudentsGrades: UIViewController,
 			}
 			else if seg_grades.selectedSegmentIndex == 1	/* Grade 2 */
 			{
-				arrayGrades[1] = calculate.totalGradeWithWeight(criterias: arrayCriterias,
+				arrayGrades.append(calculate.totalGradeWithWeight(criterias: arrayCriterias,
 															weights: arrayWeights,
-															gradeOn: gradeOn)
+															gradeOn: gradeOn))
 			}
 			else											/* Final grade */
 			{
-				arrayGrades[2] = calculate.totalGradeWithWeight(criterias: arrayCriterias,
-																weights: arrayWeights,
-																gradeOn: gradeOn)
+                arrayGrades.append(calculate.totalGradeWithWeight(criterias: arrayCriterias,
+                                                                  weights: arrayWeights,
+                                                                  gradeOn: gradeOn))
 			}
 		}
 		else											/* Grade on 100 */
@@ -241,52 +247,42 @@ class StudentsGrades: UIViewController,
 			gradeOn = 100
 			if seg_grades.selectedSegmentIndex == 0			/* Grade 1 */
 			{
-				arrayGrades[0] = calculate.totalGradeWithWeight(criterias: arrayCriterias,
+				arrayGrades.append(calculate.totalGradeWithWeight(criterias: arrayCriterias,
 																weights: arrayWeights,
-																gradeOn: gradeOn)
+																gradeOn: gradeOn))
 			}
 			else if seg_grades.selectedSegmentIndex == 1	/* Grade 2 */
 			{
-				arrayGrades[1] = calculate.totalGradeWithWeight(criterias: arrayCriterias,
+				arrayGrades.append(calculate.totalGradeWithWeight(criterias: arrayCriterias,
 																weights: arrayWeights,
-																gradeOn: gradeOn)
+																gradeOn: gradeOn))
 			}
 			else											/* Final grade */
 			{
-				arrayGrades[2] = calculate.totalGradeWithWeight(criterias: arrayCriterias,
+				arrayGrades.append(calculate.totalGradeWithWeight(criterias: arrayCriterias,
 																weights: arrayWeights,
-																gradeOn: gradeOn)
+																gradeOn: gradeOn))
 			}
 		}
-		
-		alert(title: "Save the grades",
-			  message: "Do you want to save or go to the class?",
-			  tag: 1)
+		alert(title: "Save yours grades.",
+              message: "Do you want to save?",
+              tag: 1)
 		
 		if switch_grade.isOn == false
 		{
-			save.saveData(theData: arrayGrades as AnyObject,
-						  fileName: "grades30")
-			dictStudentGrades.updateValue([currentDiscipline:arrayGrades], forKey: studentName)
+			save.saveData(theData: arrayGrades as AnyObject, fileName: "grades30")
+			dictStudentGrades.updateValue([currentDiscipline!:arrayGrades], forKey: studentName)
 			save.saveData(theData: dictStudentGrades as AnyObject, fileName: "dictionary")
 		}
 		else
 		{
-			save.saveData(theData: arrayGrades as AnyObject,
-						  fileName: "grades100")
-			dictStudentGrades.updateValue([currentDiscipline:arrayGrades], forKey: studentName)
+			save.saveData(theData: arrayGrades as AnyObject, fileName: "grades100")
+            dictStudentGrades.updateValue([currentDiscipline!:arrayGrades], forKey: studentName)
 			save.saveData(theData: dictStudentGrades as AnyObject, fileName: "dictionary")
 		}
 		
     }
 	//=============================================================================
-	//================================= Keyboard ==================================
-	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
-	{ self.view.endEditing(true) }
-	
-	func textFieldShouldReturn(_ textField: UITextField) -> Bool
-	{ textField.resignFirstResponder(); return true }
-    //=============================================================================
     //================================ Functions ==================================
 	//------------ Alerts -----------
 	func alert(title t: String,
@@ -304,10 +300,8 @@ class StudentsGrades: UIViewController,
 									  style: UIAlertActionStyle.default,
 									  handler: { (action) in
 			alert.dismiss(animated: true, completion: nil)
-			
-			
 		}))
-		alert.addAction(UIAlertAction(title: "Go",
+		alert.addAction(UIAlertAction(title: "No and Go",
 									  style: UIAlertActionStyle.default,
 									  handler: { (action) in
 			alert.dismiss(animated: true, completion: nil)
@@ -315,6 +309,15 @@ class StudentsGrades: UIViewController,
 			self.performSegue(withIdentifier: "segueTableView", sender: nil)
 		}))
 		}
+        
+        if tag == 2
+        {
+            alert.addAction(UIAlertAction(title: "Ok",
+                                          style: UIAlertActionStyle.default,
+                                          handler: { (action) in
+        	alert.dismiss(animated: true, completion: nil)
+            }))
+        }
 		self.present(alert, animated: true, completion: nil)
 	}
 	//-------------------------------
@@ -373,16 +376,18 @@ class StudentsGrades: UIViewController,
 		{
 			tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.checkmark
 			
-			currentDiscipline = arrayDisciplines[indexPath.row]
-			dictStudentGrades.updateValue([currentDiscipline:[]], forKey: studentName)
-			
-			save.saveData(theData: dictStudentGrades as AnyObject, fileName: "dictionary")
+			currentDiscipline = arrayDisciplines[indexPath.row] /* Choice pour add to dictionary */
 		}
-		
 	}
 	//-------------------------------
 	//=============================================================================
-
+    //================================= Keyboard ==================================
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
+    { self.view.endEditing(true) }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    { textField.resignFirstResponder(); return true }
+    //=============================================================================
 }
 
 
