@@ -511,7 +511,7 @@
                                 <rect key="frame" x="86" y="617" width="125" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <state key="normal" title="save/classroom"/>
+                                <state key="normal" title="Save/Classroom"/>
                                 <connections>
                                     <action selector="go_classrooms:" destination="Yy4-Zb-bvF" eventType="touchUpInside" id="ak4-WN-zaB"/>
                                 </connections>
@@ -565,7 +565,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7gt-pL-8tt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1625" y="-44"/>
+            <point key="canvasLocation" x="1490" y="-60"/>
         </scene>
         <!--Main Choices-->
         <scene sceneID="kU6-Zc-9l3">

@@ -370,8 +370,6 @@ class StudentsGrades: UIViewController,
 		
 		studentName = load.loadData(fileName: "student") as! String					/* Student name load */
 		arrayDisciplines = load.loadData(fileName: "disciplinesData") as! [String]	/* Disciplines array */
-		
-		
 	}
 	//-------------------------------
     //=============================================================================
