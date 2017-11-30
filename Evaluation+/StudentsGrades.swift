@@ -57,25 +57,22 @@ class StudentsGrades: UIViewController,
 	//---------- Variables ----------
 	var studentName: String!
 	var arrayDisciplines: [String]!
-	var dictStudentGrades = [String:[String:[Double]]]()
-	
 	var currentDiscipline: String?
-	var arrayGrades = [Double]()
-	var arrayWeights: [Double]!
-	var arrayCriterias: [Double]!
+	var dictStudentGrades = [String:[String:[[Double]]]]()
+	var arrayGrades: [[Double]]?
 	var gradeOn: Int!
 	
-	var weight1: Double!
-	var weight2: Double!
-	var weight3: Double!
-	var weight4: Double!
-	var weight5: Double!
+	var weight1: Double!; var weight2: Double!; var weight3: Double!
+	var weight4: Double!; var weight5: Double!; var arrayWeights: [Double]!
 	
-	var criteria1: Double!
-	var criteria2: Double!
-	var criteria3: Double!
-	var criteria4: Double!
-	var criteria5: Double!
+	var criteria1: Double!; var criteria2: Double!; var criteria3: Double!
+	var criteria4: Double!; var criteria5: Double!; var arrayCriterias: [Double]!
+	
+	var grade30_1: Double!; var grade30_2: Double!
+	var grade30_3: Double!; var arrayGrades30: [Double]!
+	
+	var grade100_1: Double!; var grade100_2: Double!
+	var grade100_3: Double!; var arrayGrades100: [Double]!
 	//-------------------------------
 	//================================ viewDidLoad ================================
     override func viewDidLoad()
@@ -85,9 +82,11 @@ class StudentsGrades: UIViewController,
 		//----
 		load()
 		//----
+		label_name.text = studentName		/* Show current name */
     }
 	//=============================================================================
     //======================== Switch, Segmented and Sliders ======================
+	//------------ Switch -----------
     @IBAction func switch_scale(_ sender: UISwitch)
     {
 		if switch_grade.isOn == false					/* Grade on 30 */
@@ -99,7 +98,8 @@ class StudentsGrades: UIViewController,
 			
 		}
     }
-    
+    //-------------------------------
+	//------ Segmented control ------
     @IBAction func grades_choices(_ sender: UISegmentedControl)
     {
 		if seg_grades.selectedSegmentIndex == 0			/* Grade 1 */
@@ -115,7 +115,8 @@ class StudentsGrades: UIViewController,
 			
 		}
     }
-    
+    //-------------------------------
+	//----------- Sliders -----------
     @IBAction func criterias(_ sender: UISlider)
     {
 		let calculate = Calculate()
@@ -191,22 +192,40 @@ class StudentsGrades: UIViewController,
 		default:
 			break
 		}
+		//-------------------------------
     }
     //=============================================================================
     //================================== Buttons ==================================
+	//----------- Return ------------
     @IBAction func return_students(_ sender: UIButton)
     {
-        performSegue(withIdentifier: "segueReturn", sender: nil)
+		alert(title: "Return",
+			  message: "Are you sure to return?",
+			  tag: 3)
+		
     }
-    
+    //-------------------------------
+	//----- Save / go to class ------
     @IBAction func go_classrooms(_ sender: UIButton)
     {
+		if (label_grade1.text == "" || label_grade2.text == "" ||
+		    label_grade3.text == "" || label_grade4.text == "" ||
+		    label_grade1.text == "")
+		{
+			alert(title: "No criterias!",
+				  message: "Please set the all criterias for total grade calculus.",
+				  tag: 2)
+		}
+		
         let calculate = Calculate()
         let save = SaveLoadMenager()
-        
+		
         weight1 = Double(field_weight1.text!)!; weight2 = Double(field_weight2.text!)!
         weight3 = Double(field_weight3.text!)!; weight4 = Double(field_weight4.text!)!
         weight5 = Double(field_weight5.text!)!
+		
+		grade30_1 = 0; grade30_2 = 0; grade30_3 = 0; arrayGrades30 = []
+		grade100_1 = 0; grade100_2 = 0; grade100_3 = 0; arrayGrades100 = []
         
         arrayWeights = [weight1, weight2, weight3, weight4, weight5]
         arrayCriterias = [criteria1, criteria2, criteria3, criteria4, criteria5]
@@ -224,22 +243,24 @@ class StudentsGrades: UIViewController,
 			gradeOn = 30
 			if seg_grades.selectedSegmentIndex == 0			/* Grade 1 */
 			{
-				arrayGrades.append(calculate.totalGradeWithWeight(criterias: arrayCriterias,
-																  weights: arrayWeights,
-																  gradeOn: gradeOn))
-				label_final_grade.text = String(arrayGrades[0])
+				grade30_1 = calculate.totalGradeWithWeight(criterias: arrayCriterias,
+														   weights: arrayWeights,
+														   gradeOn: gradeOn)
+				label_final_grade.text = String(grade30_1)
 			}
 			else if seg_grades.selectedSegmentIndex == 1	/* Grade 2 */
 			{
-				arrayGrades.append(calculate.totalGradeWithWeight(criterias: arrayCriterias,
-															weights: arrayWeights,
-															gradeOn: gradeOn))
+				grade30_2 = calculate.totalGradeWithWeight(criterias: arrayCriterias,
+														   weights: arrayWeights,
+														   gradeOn: gradeOn)
+				label_final_grade.text = String(grade30_2)
 			}
 			else											/* Final grade */
 			{
-                arrayGrades.append(calculate.totalGradeWithWeight(criterias: arrayCriterias,
-                                                                  weights: arrayWeights,
-                                                                  gradeOn: gradeOn))
+                grade30_3 = calculate.totalGradeWithWeight(criterias: arrayCriterias,
+														   weights: arrayWeights,
+														   gradeOn: gradeOn)
+				label_final_grade.text = String(grade30_3)
 			}
 		}
 		else											/* Grade on 100 */
@@ -247,40 +268,44 @@ class StudentsGrades: UIViewController,
 			gradeOn = 100
 			if seg_grades.selectedSegmentIndex == 0			/* Grade 1 */
 			{
-				arrayGrades.append(calculate.totalGradeWithWeight(criterias: arrayCriterias,
-																weights: arrayWeights,
-																gradeOn: gradeOn))
+				grade100_1 = calculate.totalGradeWithWeight(criterias: arrayCriterias,
+															weights: arrayWeights,
+															gradeOn: gradeOn)
+				label_final_grade.text = String(grade100_1)
 			}
 			else if seg_grades.selectedSegmentIndex == 1	/* Grade 2 */
 			{
-				arrayGrades.append(calculate.totalGradeWithWeight(criterias: arrayCriterias,
+				grade100_2 = calculate.totalGradeWithWeight(criterias: arrayCriterias,
 																weights: arrayWeights,
-																gradeOn: gradeOn))
+																gradeOn: gradeOn)
+				label_final_grade.text = String(grade100_2)
 			}
 			else											/* Final grade */
 			{
-				arrayGrades.append(calculate.totalGradeWithWeight(criterias: arrayCriterias,
-																weights: arrayWeights,
-																gradeOn: gradeOn))
+				grade100_3 = calculate.totalGradeWithWeight(criterias: arrayCriterias,
+															weights: arrayWeights,
+															gradeOn: gradeOn)
+				label_final_grade.text = String(grade100_3)
 			}
 		}
 		alert(title: "Save yours grades.",
-              message: "Do you want to save?",
-              tag: 1)
+			  message: "Do you want to save?",
+			  tag: 1)
 		
-		if switch_grade.isOn == false
-		{
-			save.saveData(theData: arrayGrades as AnyObject, fileName: "grades30")
-			dictStudentGrades.updateValue([currentDiscipline!:arrayGrades], forKey: studentName)
-			save.saveData(theData: dictStudentGrades as AnyObject, fileName: "dictionary")
-		}
-		else
-		{
-			save.saveData(theData: arrayGrades as AnyObject, fileName: "grades100")
-            dictStudentGrades.updateValue([currentDiscipline!:arrayGrades], forKey: studentName)
-			save.saveData(theData: dictStudentGrades as AnyObject, fileName: "dictionary")
-		}
+		arrayGrades30.append(grade30_1)
+		arrayGrades30.append(grade30_2)
+		arrayGrades30.append(grade30_3)
+		arrayGrades100.append(grade100_1)
+		arrayGrades100.append(grade100_2)
+		arrayGrades100.append(grade100_3)
 		
+		arrayGrades = [arrayGrades30, arrayGrades100]
+		
+		dictStudentGrades.updateValue([currentDiscipline!:arrayGrades!], forKey: studentName)
+		
+		save.saveData(theData: dictStudentGrades as AnyObject, fileName: "dictionary")
+		
+	//-------------------------------
     }
 	//=============================================================================
     //================================ Functions ==================================
@@ -289,12 +314,12 @@ class StudentsGrades: UIViewController,
 			   message m: String,
 			   tag: Int)
 	{
-		//- Alerts -
+		//- Alert -			/* contants */
 		let alert =  UIAlertController(title: t,
 									   message: m,
 									   preferredStyle: UIAlertControllerStyle.alert)
 		//- Buttons -
-		if tag == 1
+		if tag == 1			/* Save or go */
 		{
 		alert.addAction(UIAlertAction(title: "Yes",
 									  style: UIAlertActionStyle.default,
@@ -310,7 +335,7 @@ class StudentsGrades: UIViewController,
 		}))
 		}
         
-        if tag == 2
+        if tag == 2			/* Alert simple */
         {
             alert.addAction(UIAlertAction(title: "Ok",
                                           style: UIAlertActionStyle.default,
@@ -318,6 +343,23 @@ class StudentsGrades: UIViewController,
         	alert.dismiss(animated: true, completion: nil)
             }))
         }
+		
+		if tag == 3			/* Return to add student */
+		{
+			alert.addAction(UIAlertAction(title: "Yes",
+										  style: UIAlertActionStyle.default,
+										  handler: { (action) in
+			alert.dismiss(animated: true, completion: nil)
+											
+			self.performSegue(withIdentifier: "segueReturn", sender: nil)
+			}))
+			
+			alert.addAction(UIAlertAction(title: "No",
+										  style: UIAlertActionStyle.default,
+										  handler: { (action) in
+			alert.dismiss(animated: true, completion: nil)
+			}))
+		}
 		self.present(alert, animated: true, completion: nil)
 	}
 	//-------------------------------
@@ -327,18 +369,9 @@ class StudentsGrades: UIViewController,
 		let load = SaveLoadMenager()
 		
 		studentName = load.loadData(fileName: "student") as! String					/* Student name load */
-		label_name.text = studentName												/* Show current name */
-		
 		arrayDisciplines = load.loadData(fileName: "disciplinesData") as! [String]	/* Disciplines array */
 		
-		if load.checkExistingSaves(fileName: "dictionary") == true
-		{
-			dictStudentGrades = load.loadData(fileName: "dictionary") as! [String:[String:[Double]]]
-		}
-		else
-		{
-			load.saveData(theData: dictStudentGrades as AnyObject, fileName: "dictionary")
-		}
+		
 	}
 	//-------------------------------
     //=============================================================================
@@ -366,7 +399,6 @@ class StudentsGrades: UIViewController,
 	func tableView(_ tableView: UITableView,
 				   didSelectRowAt indexPath: IndexPath)
 	{
-		let save = SaveLoadMenager()
 		
 		if tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCellAccessoryType.checkmark
 		{
