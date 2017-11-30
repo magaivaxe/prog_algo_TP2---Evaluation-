@@ -109,7 +109,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1849" y="-5"/>
+            <point key="canvasLocation" x="-1817" y="102"/>
         </scene>
         <!--Sign Up-->
         <scene sceneID="aZU-qT-Obg">
@@ -236,7 +236,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YHU-uA-gHu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-846" y="-723"/>
+            <point key="canvasLocation" x="-1018" y="-645"/>
         </scene>
         <!--Table View Datas-->
         <scene sceneID="P4T-jc-pQy">
@@ -251,7 +251,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QtJ-mW-rsi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-396" y="256"/>
+            <point key="canvasLocation" x="1342" y="-181"/>
         </scene>
         <!--Students Grades-->
         <scene sceneID="ach-uI-d5j">
@@ -565,7 +565,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7gt-pL-8tt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1490" y="-60"/>
+            <point key="canvasLocation" x="407" y="-211"/>
         </scene>
         <!--Main Choices-->
         <scene sceneID="kU6-Zc-9l3">
@@ -661,12 +661,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xcJ-c0-9ij" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="13.6" y="-502.39880059970017"/>
+            <point key="canvasLocation" x="-679" y="165"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Dur-zE-cyj"/>
+        <segue reference="H5r-2l-QWY"/>
         <segue reference="SYD-fn-cLJ"/>
-        <segue reference="bXb-Of-aYw"/>
+        <segue reference="YMj-E8-gqB"/>
     </inferredMetricsTieBreakers>
 </document>
