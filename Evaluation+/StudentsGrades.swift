@@ -58,21 +58,20 @@ class StudentsGrades: UIViewController,
 	var studentName: String!
 	var arrayDisciplines: [String]!
 	var currentDiscipline: String?
-	var dictStudentGrades = [String:[String:[[Double]]]]()
-	var arrayGrades: [[Double]]!
+	var dictStudentGrades30 = [String:(course: String, grade1: Double,
+									   grade2: Double, grade3: Double)]()
+	var dictStudentGrades100 = [String:(course: String, grade1: Double,
+										grade2: Double, grade3: Double)]()
+
 	var gradeOn: Int!
+	var weight1, weight2, weight3, weight4, weight5,
+		criteria1, criteria2, criteria3, criteria4,
+		criteria5, grade30_1, grade30_2, grade30_3,
+		grade100_1, grade100_2, grade100_3: Double!
 	
-	var weight1: Double!; var weight2: Double!; var weight3: Double!
-	var weight4: Double!; var weight5: Double!; var arrayWeights: [Double]!
+	var arrayWeights, arrayCriterias: [Double]!
 	
-	var criteria1: Double!; var criteria2: Double!; var criteria3: Double!
-	var criteria4: Double!; var criteria5: Double!; var arrayCriterias: [Double]!
 	
-	var grade30_1: Double!; var grade30_2: Double!
-	var grade30_3: Double!; var arrayGrades30: [Double]!
-	
-	var grade100_1: Double!; var grade100_2: Double!
-	var grade100_3: Double!; var arrayGrades100: [Double]!
 	//-------------------------------
 	//================================ viewDidLoad ================================
     override func viewDidLoad()
@@ -251,8 +250,8 @@ class StudentsGrades: UIViewController,
 		weight3 = Double(field_weight3.text!)!; weight4 = Double(field_weight4.text!)!
 		weight5 = Double(field_weight5.text!)!
 		
-		grade30_1 = 0; grade30_2 = 0; grade30_3 = 0; arrayGrades30 = []
-		grade100_1 = 0; grade100_2 = 0; grade100_3 = 0; arrayGrades100 = []
+		grade30_1 = 0; grade30_2 = 0; grade30_3 = 0
+		grade100_1 = 0; grade100_2 = 0; grade100_3 = 0
         
 		arrayWeights = [weight1, weight2, weight3, weight4, weight5]
         arrayCriterias = [criteria1, criteria2, criteria3, criteria4, criteria5]
@@ -319,18 +318,13 @@ class StudentsGrades: UIViewController,
 			  message: "Do you want to save?",
 			  tag: 1)
 		
-		arrayGrades30.append(grade30_1)
-		arrayGrades30.append(grade30_2)
-		arrayGrades30.append(grade30_3)
-		arrayGrades100.append(grade100_1)
-		arrayGrades100.append(grade100_2)
-		arrayGrades100.append(grade100_3)
+		dictStudentGrades30.updateValue((currentDiscipline!, grade30_1, grade30_2, grade30_3),
+										forKey: studentName) 	/* Add the values to dictionary */
+		dictStudentGrades100.updateValue((currentDiscipline!, grade100_1, grade100_2, grade100_3),
+										 forKey: studentName)
 		
-		arrayGrades = [arrayGrades30, arrayGrades100]
-		
-		dictStudentGrades.updateValue([currentDiscipline!:arrayGrades], forKey: studentName) 	/* Add the values to dictionary */
-		
-		save.saveData(theData: dictStudentGrades as AnyObject, fileName: "dictionary")			/* Save the dictionary */
+		save.saveData(theData: dictStudentGrades30 as AnyObject, fileName: "dictionary30")			/* Save the dictionary */
+		save.saveData(theData: dictStudentGrades100 as AnyObject, fileName: "dictionary100")
 		
 		save.saveData(theData: arrayWeights as AnyObject, fileName: "weights")					/* Save the weights to load */
 	//-------------------------------
@@ -426,9 +420,7 @@ class StudentsGrades: UIViewController,
 	//--------- Cells number --------
     func tableView(_ tableView: UITableView,
 				   numberOfRowsInSection section: Int) -> Int
-	{
-		return arrayDisciplines.count
-    }
+	{ return arrayDisciplines.count }
     //-------------------------------
 	//------- Cells contents --------
     func tableView(_ tableView: UITableView,
