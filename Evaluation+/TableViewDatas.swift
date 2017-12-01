@@ -43,7 +43,8 @@ class TableViewDatas: UIViewController,
 	var weights1, weights2, weights3: Double!
 	var arrayWeights: [Double]!
 	
-	var dictStudentGrades = [String:[String:[[Double]]]]()
+	var dictStudentGrades30 = [String:[String:[[Double]]]]()
+	var dictStudentGrades100 = [String:[String:[[Double]]]]()
 	var arrayCourses = [String]()
 	var arrayDictGrades = [[String:[[Double]]]]()
 	var arrayStudents = [String]()
@@ -65,7 +66,7 @@ class TableViewDatas: UIViewController,
     }
 	//=============================================================================
 	//================================ Functions ==================================
-	//----------- Arrays ------------
+	//----------- Arrays ------------		/* Function to set the arrays */
 	func setArrays(index i: Int)
 	{
 		arrayStudents = [String](dictStudentGrades.keys)
@@ -97,7 +98,8 @@ class TableViewDatas: UIViewController,
 	{
 		let load = SaveLoadMenager()
 		
-		dictStudentGrades = load.loadData(fileName: "dictionary") as! [student:[course:grades]]
+		dictStudentGrades30 = load.loadData(fileName: "dictionary30") as! [student:[course:grades]]
+		dictStudentGrades100 = load.loadData(fileName: "dictionary100") as! [student:[course:grades]]
 		
 		if load.checkExistingSaves(fileName: "weightsAverage") == true
 		{
@@ -119,7 +121,8 @@ class TableViewDatas: UIViewController,
 	//--------- Cells number --------
 	func tableView(_ tableView: UITableView,
 				   numberOfRowsInSection section: Int) -> Int
-	{ return dictStudentGrades.count }
+	{ if switch_gradeOn.isOn == true  {return dictStudentGrades30.count}
+	else  {return dictStudentGrades100.count} }
 	//-------------------------------
 	//------- Cells contents --------
 	func tableView(_ tableView: UITableView,
@@ -127,7 +130,7 @@ class TableViewDatas: UIViewController,
 	{
 		let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell")!
 		
-		if switch_gradeOn.isOn == false
+		if switch_gradeOn.isOn == true
 		{
 //			if let studentName = cell.viewWithTag(100) as! UILabel!
 //			{ studentName.text = [String]((dictStudentGrades.values)[indexPath.row]) }
