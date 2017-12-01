@@ -14,23 +14,13 @@ class Calculate
 							  weights w: [Double],
 							  gradeOn g: Int) -> Double
 	{
-		var arrayGradeOn: [Double]!
 		var arrayPonderation = [Double]()
 		var total: Double!
 		let sumWeights = w.reduce(0, +)					/* Sum all weight numbers */
 		
-		if g == 30
-		{
-			arrayGradeOn = c.map({$0 * 30 / 5})			/* Apply the grade On */
-		}
-		if g == 100
-		{
-			arrayGradeOn = c.map({$0 * 100 / 5})
-		}
-
 		var i = 0; while i < c.count					/* Average weighted */
 		{
-			arrayPonderation.append((arrayGradeOn[i] * w[i]) / sumWeights)
+			arrayPonderation.append((c[i] * w[i]) / sumWeights)
 			
 			i = i + 1
 		}
@@ -66,7 +56,7 @@ class Calculate
 		return arrayPonderation
 	}
 	
-	func GradeWithWeight(criterias c: Double,
+	func gradeWithGradeOn(criterias c: Double,
 						 gradeOn g: Int) -> Double
 	{
 		var criteriaWeight: Double!
