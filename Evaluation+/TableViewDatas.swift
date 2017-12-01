@@ -88,10 +88,8 @@ class TableViewDatas: UIViewController,
 	{
 		let load = SaveLoadMenager()
 		
-		dictStudentGrades30 = load.loadData(fileName: "dictionary30")
-			as! [String:(course: String, grade1: Double, grade2: Double, grade3: Double)]
-		dictStudentGrades100 = load.loadData(fileName: "dictionary100")
-			as! [String:(course: String, grade1: Double, grade2: Double, grade3: Double)]
+		dictStudentGrades30 = load.loadMonDict(fileName: "dictionary30")
+		dictStudentGrades100 = load.loadMonDict(fileName: "dictionary100")
 		
 		if load.checkExistingSaves(fileName: "weightsAverage") == true
 		{

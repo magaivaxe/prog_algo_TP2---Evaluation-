@@ -250,8 +250,7 @@ class StudentsGrades: UIViewController,
 		weight3 = Double(field_weight3.text!)!; weight4 = Double(field_weight4.text!)!
 		weight5 = Double(field_weight5.text!)!
 		
-		grade30_1 = 0; grade30_2 = 0; grade30_3 = 0
-		grade100_1 = 0; grade100_2 = 0; grade100_3 = 0
+		
         
 		arrayWeights = [weight1, weight2, weight3, weight4, weight5]
         arrayCriterias = [criteria1, criteria2, criteria3, criteria4, criteria5]
@@ -397,6 +396,9 @@ class StudentsGrades: UIViewController,
 		label_name.text = studentName												/* Show current name */
 		
 		arrayDisciplines = load.loadData(fileName: "disciplinesData") as! [String]	/* Disciplines array */
+		
+		grade30_1 = 0; grade30_2 = 0; grade30_3 = 0
+		grade100_1 = 0; grade100_2 = 0; grade100_3 = 0
 		
 		if load.checkExistingSaves(fileName: "weights") == true						/* Load the weights */
 		{
