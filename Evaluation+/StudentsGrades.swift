@@ -55,13 +55,14 @@ class StudentsGrades: UIViewController,
     //--------------------
     //-------------------------------
 	//---------- Variables ----------
+	typealias student = String
+	typealias course = String
+	typealias grades = [[Double]]
+	
 	var studentName: String!
-	var arrayDisciplines: [String]!
-	var currentDiscipline: String?
-	var dictStudentGrades30 = [String:[(course: String, grade1: Double,
-									   grade2: Double, grade3: Double)]]()
-	var dictStudentGrades100 = [String:[(course: String, grade1: Double,
-										grade2: Double, grade3: Double)]]()
+	var arrayCourses: [String]!
+	var currentCourse: String?
+	var dictStudentGrades = [student:[course:grades]]()
 
 	var gradeOn: Int!
 	var weight1, weight2, weight3, weight4, weight5,
@@ -69,7 +70,9 @@ class StudentsGrades: UIViewController,
 		criteria5, grade30_1, grade30_2, grade30_3,
 		grade100_1, grade100_2, grade100_3: Double!
 	
-	var arrayWeights, arrayCriterias: [Double]!
+	var arrayWeights, arrayCriterias,
+		arrayGrades30, arrayGrades100: [Double]!
+	var arrayGrades: [[Double]]!
 	
 	
 	//-------------------------------
@@ -255,7 +258,7 @@ class StudentsGrades: UIViewController,
 		arrayWeights = [weight1, weight2, weight3, weight4, weight5]
         arrayCriterias = [criteria1, criteria2, criteria3, criteria4, criteria5]
         
-        if currentDiscipline == nil
+        if currentCourse == nil
         {
             alert(title: "Warning",
                   message: "You must choose the course!",
@@ -317,16 +320,14 @@ class StudentsGrades: UIViewController,
 			  message: "Do you want to save?",
 			  tag: 1)
 		
-		dictStudentGrades30.updateValue([(currentDiscipline!, grade30_1, grade30_2, grade30_3)],
-										forKey: studentName) 	/* Add the values to dictionary */
-		dictStudentGrades100.updateValue([(currentDiscipline!, grade100_1, grade100_2, grade100_3)],
-										 forKey: studentName)
+		arrayGrades30 = [grade30_1, grade30_2, grade30_3]
+		arrayGrades100 = [grade100_1, grade100_2, grade100_3]
+		arrayGrades = [arrayGrades30, arrayGrades100]
 		
-		save.saveMonDict(theData: dictStudentGrades30, fileName: "dictionary30")
-		save.saveMonDict(theData: dictStudentGrades100, fileName: "dictionary100")
 		
-//		save.saveData(theData: dictStudentGrades30 as AnyObject, fileName: "dictionary30")			/* Save the dictionary */
-//		save.saveData(theData: dictStudentGrades100 as AnyObject, fileName: "dictionary100")
+		dictStudentGrades.updateValue([currentCourse!: arrayGrades], forKey: studentName) 	/* Add the values to dictionary */
+		
+		save.saveData(theData: dictStudentGrades as AnyObject, fileName: "dictionary")
 		
 		save.saveData(theData: arrayWeights as AnyObject, fileName: "weights")					/* Save the weights to load */
 	//-------------------------------
@@ -395,7 +396,7 @@ class StudentsGrades: UIViewController,
 		studentName = load.loadData(fileName: "student") as! String					/* Student name load */
 		label_name.text = studentName												/* Show current name */
 		
-		arrayDisciplines = load.loadData(fileName: "disciplinesData") as! [String]	/* Disciplines array */
+		arrayCourses = load.loadData(fileName: "coursesData") as! [String]	/* Disciplines array */
 		
 		grade30_1 = 0; grade30_2 = 0; grade30_3 = 0
 		grade100_1 = 0; grade100_2 = 0; grade100_3 = 0
@@ -425,7 +426,7 @@ class StudentsGrades: UIViewController,
 	//--------- Cells number --------
     func tableView(_ tableView: UITableView,
 				   numberOfRowsInSection section: Int) -> Int
-	{ return arrayDisciplines.count }
+	{ return arrayCourses.count }
     //-------------------------------
 	//------- Cells contents --------
     func tableView(_ tableView: UITableView,
@@ -434,7 +435,7 @@ class StudentsGrades: UIViewController,
 		let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.default,
 													reuseIdentifier: nil)
 		
-		cell.textLabel?.text = arrayDisciplines[indexPath.row]
+		cell.textLabel?.text = arrayCourses[indexPath.row]
 		
 		return cell
     }
@@ -452,7 +453,7 @@ class StudentsGrades: UIViewController,
 		{
 			tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.checkmark
 			
-			currentDiscipline = arrayDisciplines[indexPath.row] /* Choice pour add to dictionary */
+			currentCourse = arrayCourses[indexPath.row] /* Choice pour add to dictionary */
 		}
 	}
 	//-------------------------------

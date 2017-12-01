@@ -36,19 +36,21 @@ class TableViewDatas: UIViewController,
 	//-------------------------------
 	//---------- Variables ----------
 	
+	typealias student = String
+	typealias course = String
+	typealias grades = [[Double]]
+	
 	var weights1, weights2, weights3: Double!
 	var arrayWeights: [Double]!
 	
-	var dictStudentGrades30 = [String:[(course: String, grade1: Double,
-									   grade2: Double, grade3: Double)]]()
-	var dictStudentGrades100 = [String:[(course: String, grade1: Double,
-										grade2: Double, grade3: Double)]]()
+	var dictStudentGrades = [String:[String:[[Double]]]]()
+	var arrayCourses = [String]()
+	var arrayDictGrades = [[String:[[Double]]]]()
+	var arrayStudents = [String]()
+	var arrayGrades = [[Double]]()
 	
-	var arrayStudents_30, arrayStudents_100: [String]!
-	var arrayCourses_30, arrayCourses_100: [String]!
-	var arrayGrade1_30, arrayGrade1_100: [Double]!
-	var arrayGrade2_30, arrayGrade2_100: [Double]!
-	var arrayGrade3_30, arrayGrade3_100: [Double]!
+	var tupleStudentGrades = [(student: String, course: String, grade1: Double, grade2: Double, grade3: Double)]()
+
 	//-------------------------------
 	//================================ viewDidLoad ================================
     override func viewDidLoad()
@@ -58,29 +60,35 @@ class TableViewDatas: UIViewController,
 		//----
 		loads()
 		//----
-		setArrays()
+		
 		//----
     }
 	//=============================================================================
 	//================================ Functions ==================================
 	//----------- Arrays ------------
-	func setArrays()
+	func setArrays(index i: Int)
 	{
-		for (student, info) in dictStudentGrades30
+		arrayStudents = [String](dictStudentGrades.keys)
+		arrayDictGrades = [[String:[[Double]]]](dictStudentGrades.values)
+		var k = 0; while k < dictStudentGrades.count
 		{
-			arrayStudents_30.append(student)
-			arrayCourses_30.append(info[0].course)
-			arrayGrade1_30.append(info[0].grade1)
-			arrayGrade2_30.append(info[0].grade2)
-			arrayGrade3_30.append(info[0].grade3)
-		}
-		for (student, info) in dictStudentGrades100
-		{
-			arrayStudents_100.append(student)
-			arrayCourses_100.append(info[0].course)
-			arrayGrade1_100.append(info[0].grade1)
-			arrayGrade2_100.append(info[0].grade2)
-			arrayGrade3_100.append(info[0].grade3)
+			tupleStudentGrades[k].student = arrayStudents[k]
+			
+			for i in 0..<arrayDictGrades.count
+			{
+				let c = [String](arrayDictGrades[i].keys)
+				let dg = [[[Double]]](arrayDictGrades[i].values)
+				
+				tupleStudentGrades[i].course = c[i]
+				
+				for j in 0..<dg.count
+				{
+					tupleStudentGrades[j].grade1 = dg[0][0][j]
+					tupleStudentGrades[j].grade2 = dg[0][0][j + 1]
+					tupleStudentGrades[j].grade3 = dg[0][0][j + 2]
+				}
+			}
+			k = k + 1
 		}
 	}
 	//-------------------------------
@@ -89,8 +97,7 @@ class TableViewDatas: UIViewController,
 	{
 		let load = SaveLoadMenager()
 		
-		dictStudentGrades30 = load.loadMonDict(fileName: "dictionary30")
-		dictStudentGrades100 = load.loadMonDict(fileName: "dictionary100")
+		dictStudentGrades = load.loadData(fileName: "dictionary") as! [student:[course:grades]]
 		
 		if load.checkExistingSaves(fileName: "weightsAverage") == true
 		{
@@ -112,7 +119,7 @@ class TableViewDatas: UIViewController,
 	//--------- Cells number --------
 	func tableView(_ tableView: UITableView,
 				   numberOfRowsInSection section: Int) -> Int
-	{ return dictStudentGrades30.count }
+	{ return dictStudentGrades.count }
 	//-------------------------------
 	//------- Cells contents --------
 	func tableView(_ tableView: UITableView,
@@ -122,40 +129,38 @@ class TableViewDatas: UIViewController,
 		
 		if switch_gradeOn.isOn == false
 		{
-			if let studentName = cell.viewWithTag(100) as! UILabel!
-			{ studentName.text = String((arrayStudents_30)[indexPath.row]) }
-			
-			if let courseName = cell.viewWithTag(200) as! UILabel!
-			{ courseName.text = String((arrayCourses_30)[indexPath.row]) }
-			
-			if let grade1 = cell.viewWithTag(301) as! UILabel!
-			{ grade1.text = String((arrayGrade1_30)[indexPath.row]) }
-			
-			if let grade2 = cell.viewWithTag(302) as! UILabel!
-			{ grade2.text = String((arrayGrade2_30)[indexPath.row]) }
-			
-			if let grade3 = cell.viewWithTag(303) as! UILabel!
-			{ grade3.text = String((arrayGrade3_30)[indexPath.row]) }
+//			if let studentName = cell.viewWithTag(100) as! UILabel!
+//			{ studentName.text = [String]((dictStudentGrades.values)[indexPath.row]) }
+//
+//			if let courseName = cell.viewWithTag(200) as! UILabel!
+//			{ courseName.text = String((arrayCourses_30)[indexPath.row]) }
+//
+//			if let grade1 = cell.viewWithTag(301) as! UILabel!
+//			{ grade1.text = String((arrayGrade1_30)[indexPath.row]) }
+//
+//			if let grade2 = cell.viewWithTag(302) as! UILabel!
+//			{ grade2.text = String((arrayGrade2_30)[indexPath.row]) }
+//
+//			if let grade3 = cell.viewWithTag(303) as! UILabel!
+//			{ grade3.text = String((arrayGrade3_30)[indexPath.row]) }
 		}
 		else
 		{
-			if let studentName = cell.viewWithTag(100) as! UILabel!
-			{ studentName.text = String((arrayStudents_100)[indexPath.row]) }
-			
-			if let courseName = cell.viewWithTag(200) as! UILabel!
-			{ courseName.text = String((arrayCourses_100)[indexPath.row]) }
-			
-			if let grade1 = cell.viewWithTag(301) as! UILabel!
-			{ grade1.text = String((arrayGrade1_100)[indexPath.row]) }
-			
-			if let grade2 = cell.viewWithTag(302) as! UILabel!
-			{ grade2.text = String((arrayGrade2_100)[indexPath.row]) }
-			
-			if let grade3 = cell.viewWithTag(303) as! UILabel!
-			{ grade3.text = String((arrayGrade3_100)[indexPath.row]) }
+//			if let studentName = cell.viewWithTag(100) as! UILabel!
+//			{ studentName.text = String((arrayStudents_100)[indexPath.row]) }
+//
+//			if let courseName = cell.viewWithTag(200) as! UILabel!
+//			{ courseName.text = String((arrayCourses_100)[indexPath.row]) }
+//
+//			if let grade1 = cell.viewWithTag(301) as! UILabel!
+//			{ grade1.text = String((arrayGrade1_100)[indexPath.row]) }
+//
+//			if let grade2 = cell.viewWithTag(302) as! UILabel!
+//			{ grade2.text = String((arrayGrade2_100)[indexPath.row]) }
+//
+//			if let grade3 = cell.viewWithTag(303) as! UILabel!
+//			{ grade3.text = String((arrayGrade3_100)[indexPath.row]) }
 		}
-		
-		
 		return cell
 	}
 	//-------------------------------
