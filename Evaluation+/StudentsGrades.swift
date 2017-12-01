@@ -58,10 +58,10 @@ class StudentsGrades: UIViewController,
 	var studentName: String!
 	var arrayDisciplines: [String]!
 	var currentDiscipline: String?
-	var dictStudentGrades30 = [String:(course: String, grade1: Double,
-									   grade2: Double, grade3: Double)]()
-	var dictStudentGrades100 = [String:(course: String, grade1: Double,
-										grade2: Double, grade3: Double)]()
+	var dictStudentGrades30 = [String:[(course: String, grade1: Double,
+									   grade2: Double, grade3: Double)]]()
+	var dictStudentGrades100 = [String:[(course: String, grade1: Double,
+										grade2: Double, grade3: Double)]]()
 
 	var gradeOn: Int!
 	var weight1, weight2, weight3, weight4, weight5,
@@ -317,9 +317,9 @@ class StudentsGrades: UIViewController,
 			  message: "Do you want to save?",
 			  tag: 1)
 		
-		dictStudentGrades30.updateValue((currentDiscipline!, grade30_1, grade30_2, grade30_3),
+		dictStudentGrades30.updateValue([(currentDiscipline!, grade30_1, grade30_2, grade30_3)],
 										forKey: studentName) 	/* Add the values to dictionary */
-		dictStudentGrades100.updateValue((currentDiscipline!, grade100_1, grade100_2, grade100_3),
+		dictStudentGrades100.updateValue([(currentDiscipline!, grade100_1, grade100_2, grade100_3)],
 										 forKey: studentName)
 		
 		save.saveMonDict(theData: dictStudentGrades30, fileName: "dictionary30")

@@ -39,10 +39,11 @@ class TableViewDatas: UIViewController,
 	var weights1, weights2, weights3: Double!
 	var arrayWeights: [Double]!
 	
-	var dictStudentGrades30 = [String:(course: String, grade1: Double,
-									   grade2: Double, grade3: Double)]()
-	var dictStudentGrades100 = [String:(course: String, grade1: Double,
-										grade2: Double, grade3: Double)]()
+	var dictStudentGrades30 = [String:[(course: String, grade1: Double,
+									   grade2: Double, grade3: Double)]]()
+	var dictStudentGrades100 = [String:[(course: String, grade1: Double,
+										grade2: Double, grade3: Double)]]()
+	
 	var arrayStudents_30, arrayStudents_100: [String]!
 	var arrayCourses_30, arrayCourses_100: [String]!
 	var arrayGrade1_30, arrayGrade1_100: [Double]!
@@ -68,18 +69,18 @@ class TableViewDatas: UIViewController,
 		for (student, info) in dictStudentGrades30
 		{
 			arrayStudents_30.append(student)
-			arrayCourses_30.append(info.course)
-			arrayGrade1_30.append(info.grade1)
-			arrayGrade2_30.append(info.grade2)
-			arrayGrade3_30.append(info.grade3)
+			arrayCourses_30.append(info[0].course)
+			arrayGrade1_30.append(info[0].grade1)
+			arrayGrade2_30.append(info[0].grade2)
+			arrayGrade3_30.append(info[0].grade3)
 		}
 		for (student, info) in dictStudentGrades100
 		{
 			arrayStudents_100.append(student)
-			arrayCourses_100.append(info.course)
-			arrayGrade1_100.append(info.grade1)
-			arrayGrade2_100.append(info.grade2)
-			arrayGrade3_100.append(info.grade3)
+			arrayCourses_100.append(info[0].course)
+			arrayGrade1_100.append(info[0].grade1)
+			arrayGrade2_100.append(info[0].grade2)
+			arrayGrade3_100.append(info[0].grade3)
 		}
 	}
 	//-------------------------------
