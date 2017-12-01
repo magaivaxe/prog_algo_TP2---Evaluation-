@@ -323,8 +323,11 @@ class StudentsGrades: UIViewController,
 		dictStudentGrades100.updateValue((currentDiscipline!, grade100_1, grade100_2, grade100_3),
 										 forKey: studentName)
 		
-		save.saveData(theData: dictStudentGrades30 as AnyObject, fileName: "dictionary30")			/* Save the dictionary */
-		save.saveData(theData: dictStudentGrades100 as AnyObject, fileName: "dictionary100")
+		save.saveMonDict(theData: dictStudentGrades30, fileName: "dictionary30")
+		save.saveMonDict(theData: dictStudentGrades100, fileName: "dictionary100")
+		
+//		save.saveData(theData: dictStudentGrades30 as AnyObject, fileName: "dictionary30")			/* Save the dictionary */
+//		save.saveData(theData: dictStudentGrades100 as AnyObject, fileName: "dictionary100")
 		
 		save.saveData(theData: arrayWeights as AnyObject, fileName: "weights")					/* Save the weights to load */
 	//-------------------------------
