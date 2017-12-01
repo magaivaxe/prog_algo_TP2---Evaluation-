@@ -251,7 +251,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QtJ-mW-rsi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1342" y="-181"/>
+            <point key="canvasLocation" x="1342" y="-212"/>
         </scene>
         <!--Students Grades-->
         <scene sceneID="ach-uI-d5j">
@@ -425,7 +425,7 @@
                                 <rect key="frame" x="322" y="616" width="37" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.86884883310000005" green="0.86884883310000005" blue="0.86884883310000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -665,7 +665,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="H5r-2l-QWY"/>
+        <segue reference="Dur-zE-cyj"/>
         <segue reference="SYD-fn-cLJ"/>
         <segue reference="YMj-E8-gqB"/>
     </inferredMetricsTieBreakers>
