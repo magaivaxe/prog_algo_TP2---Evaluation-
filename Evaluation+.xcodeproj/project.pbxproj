@@ -13,6 +13,7 @@
 		9B06C8FF1FD0B588005C0036 /* Champagne & Limousines.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9B06C8FA1FD0B588005C0036 /* Champagne & Limousines.ttf */; };
 		9B6A40821FCC7C26004AF7AE /* TableViewDatas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6A40811FCC7C26004AF7AE /* TableViewDatas.swift */; };
 		9B6A40861FCCBAC3004AF7AE /* StudentsGrades.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6A40851FCCBAC3004AF7AE /* StudentsGrades.swift */; };
+		BF1393EB1FD2EC3300A538FA /* DictionaryToTuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1393EA1FD2EC3300A538FA /* DictionaryToTuple.swift */; };
 		BF39C5521FCEB47100E02D70 /* Calculate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF39C5511FCEB47100E02D70 /* Calculate.swift */; };
 		BF91FB411FC55DD8009332AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF91FB401FC55DD8009332AC /* AppDelegate.swift */; };
 		BF91FB431FC55DD8009332AC /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF91FB421FC55DD8009332AC /* SignIn.swift */; };
@@ -32,6 +33,7 @@
 		9B06C8FA1FD0B588005C0036 /* Champagne & Limousines.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Champagne & Limousines.ttf"; sourceTree = "<group>"; };
 		9B6A40811FCC7C26004AF7AE /* TableViewDatas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewDatas.swift; sourceTree = "<group>"; };
 		9B6A40851FCCBAC3004AF7AE /* StudentsGrades.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsGrades.swift; sourceTree = "<group>"; };
+		BF1393EA1FD2EC3300A538FA /* DictionaryToTuple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryToTuple.swift; sourceTree = "<group>"; };
 		BF39C5511FCEB47100E02D70 /* Calculate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculate.swift; sourceTree = "<group>"; };
 		BF91FB3D1FC55DD8009332AC /* Evaluation+.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Evaluation+.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF91FB401FC55DD8009332AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				BF91FB621FC56A03009332AC /* Styles.swift */,
 				BF91FB5C1FC5637F009332AC /* SaveLoadMenager.swift */,
 				BF39C5511FCEB47100E02D70 /* Calculate.swift */,
+				BF1393EA1FD2EC3300A538FA /* DictionaryToTuple.swift */,
 			);
 			name = classes;
 			sourceTree = "<group>";
@@ -223,6 +226,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF91FB431FC55DD8009332AC /* SignIn.swift in Sources */,
+				BF1393EB1FD2EC3300A538FA /* DictionaryToTuple.swift in Sources */,
 				BF91FB5D1FC5637F009332AC /* SaveLoadMenager.swift in Sources */,
 				BF91FB531FC55EAE009332AC /* SignUp.swift in Sources */,
 				BF39C5521FCEB47100E02D70 /* Calculate.swift in Sources */,

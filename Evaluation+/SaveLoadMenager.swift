@@ -39,15 +39,15 @@ class SaveLoadMenager
 	}
 	//-----------------------
 	
-	func saveMonDict(theData: [String:[(course: String, grade1: Double, grade2: Double, grade3: Double)]], fileName: String)
-	{
-		UserDefaults.standard.set(theData, forKey: fileName)
-	}
-	
-	func loadMonDict(fileName: String) -> [String:[(course: String, grade1: Double, grade2: Double, grade3: Double)]]
-	{
-		return UserDefaults.standard.dictionary(forKey: fileName) as! [String:[(course: String, grade1: Double, grade2: Double, grade3: Double)]]
-	}
+//	func saveMonDict(theData: [String:[(course: String, grade1: Double, grade2: Double, grade3: Double)]], fileName: String)
+//	{
+//		UserDefaults.standard.set(theData, forKey: fileName)
+//	}
+//	
+//	func loadMonDict(fileName: String) -> [String:[(course: String, grade1: Double, grade2: Double, grade3: Double)]]
+//	{
+//		return UserDefaults.standard.dictionary(forKey: fileName) as! [String:[(course: String, grade1: Double, grade2: Double, grade3: Double)]]
+//	}
 }
 
 

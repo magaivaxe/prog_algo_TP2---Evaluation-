@@ -57,12 +57,13 @@ class StudentsGrades: UIViewController,
 	//---------- Variables ----------
 	typealias student = String
 	typealias course = String
-	typealias grades = [[Double]]
+	typealias grades = [Double]
 	
 	var studentName: String!
 	var arrayCourses: [String]!
 	var currentCourse: String?
-	var dictStudentGrades = [student:[course:grades]]()
+	var dictStudentGrades30 = [student:[course:grades]]()
+	var dictStudentGrades100 = [student:[course:grades]]()
 
 	var gradeOn: Int!
 	var weight1, weight2, weight3, weight4, weight5,
@@ -72,7 +73,7 @@ class StudentsGrades: UIViewController,
 	
 	var arrayWeights, arrayCriterias,
 		arrayGrades30, arrayGrades100: [Double]!
-	var arrayGrades: [[Double]]!
+	var arrayGrades: [Double]!
 	
 	
 	//-------------------------------
@@ -322,14 +323,18 @@ class StudentsGrades: UIViewController,
 		
 		arrayGrades30 = [grade30_1, grade30_2, grade30_3]
 		arrayGrades100 = [grade100_1, grade100_2, grade100_3]
-		arrayGrades = [arrayGrades30, arrayGrades100]
 		
+		dictStudentGrades30.updateValue([currentCourse!: arrayGrades30],
+										forKey: studentName) 				/* Add the values to dictionary30 */
+		dictStudentGrades100.updateValue([currentCourse!: arrayGrades100],
+										 forKey: studentName)				/* Add the values to dictionary100 */
 		
-		dictStudentGrades.updateValue([currentCourse!: arrayGrades], forKey: studentName) 	/* Add the values to dictionary */
-		
-		save.saveData(theData: dictStudentGrades as AnyObject, fileName: "dictionary")
-		
-		save.saveData(theData: arrayWeights as AnyObject, fileName: "weights")					/* Save the weights to load */
+		save.saveData(theData: dictStudentGrades30 as AnyObject,
+					  fileName: "dictionary30")
+		save.saveData(theData: dictStudentGrades100 as AnyObject,
+					  fileName: "dictionary100")
+		save.saveData(theData: arrayWeights as AnyObject,
+					  fileName: "weights")	/* Save the weights to load */
 	//-------------------------------
     }
 	//=============================================================================

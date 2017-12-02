@@ -15,7 +15,6 @@ class TableViewDatas: UIViewController,
 					  UITableViewDelegate,
 					  UITableViewDataSource
 {
-	
 	//----------- Outlets -----------
 	@IBOutlet weak var weight1: UITextField!
 	@IBOutlet weak var weight2: UITextField!
@@ -38,20 +37,20 @@ class TableViewDatas: UIViewController,
 	
 	typealias student = String
 	typealias course = String
-	typealias grades = [[Double]]
+	typealias grades = [Double]
 	
 	var weights1, weights2, weights3: Double!
 	var arrayWeights: [Double]!
 	
-	var dictStudentGrades30 = [String:[String:[[Double]]]]()
-	var dictStudentGrades100 = [String:[String:[[Double]]]]()
+	var dictStudentGrades30 = [String:[String:[Double]]]()
+	var dictStudentGrades100 = [String:[String:[Double]]]()
 	var arrayCourses = [String]()
-	var arrayDictGrades = [[String:[[Double]]]]()
+	var arrayDictGrades = [[String:[Double]]]()
 	var arrayStudents = [String]()
-	var arrayGrades = [[Double]]()
+	var arrayGrades = [Double]()
 	
-	var tupleStudentGrades = [(student: String, course: String, grade1: Double, grade2: Double, grade3: Double)]()
-
+	var tupleStudentGrades30 = [(student: String, course: String, grade1: Double, grade2: Double, grade3: Double)]()
+	var tupleStudentGrades100 = [(student: String, course: String, grade1: Double, grade2: Double, grade3: Double)]()
 	//-------------------------------
 	//================================ viewDidLoad ================================
     override func viewDidLoad()
@@ -67,29 +66,15 @@ class TableViewDatas: UIViewController,
 	//=============================================================================
 	//================================ Functions ==================================
 	//----------- Arrays ------------		/* Function to set the arrays */
-	func setArrays(index i: Int)
+	func setArrays()
 	{
-		arrayStudents = [String](dictStudentGrades.keys)
-		arrayDictGrades = [[String:[[Double]]]](dictStudentGrades.values)
-		var k = 0; while k < dictStudentGrades.count
+		if switch_gradeOn.isOn == false		/* grade on 30 */
 		{
-			tupleStudentGrades[k].student = arrayStudents[k]
 			
-			for i in 0..<arrayDictGrades.count
-			{
-				let c = [String](arrayDictGrades[i].keys)
-				let dg = [[[Double]]](arrayDictGrades[i].values)
-				
-				tupleStudentGrades[i].course = c[i]
-				
-				for j in 0..<dg.count
-				{
-					tupleStudentGrades[j].grade1 = dg[0][0][j]
-					tupleStudentGrades[j].grade2 = dg[0][0][j + 1]
-					tupleStudentGrades[j].grade3 = dg[0][0][j + 2]
-				}
-			}
-			k = k + 1
+		}
+		else								/* grade on 100 */
+		{
+			
 		}
 	}
 	//-------------------------------
