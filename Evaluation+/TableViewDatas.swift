@@ -40,7 +40,7 @@ class TableViewDatas: UIViewController,
 	typealias grade = Double
 	typealias grades = [Double]
 	
-	var weights1, weights2, weights3: Double!
+	var weights1, weights2, weights3, averageNumber30, averageNumber100: Double!
 	var arrayWeights: [Double]!
 	
 	var dictStudentGrades30 = [String:[String:[Double]]]()
@@ -63,16 +63,20 @@ class TableViewDatas: UIViewController,
 	//=============================================================================
 	//======================== Switch, Segmented and Sliders ======================
 	
+	@IBAction func gradeOn30_On100(_ sender: UISwitch)
+	{
+		table_view.reloadData()
+	}
 	
 	//=============================================================================
 	//================================ Functions ==================================
+
 	//----------- Arrays ------------		/* Function to set the arrays */
 	func setTuple()
 	{
 		let conversion = DictionaryToTuple()
 		
 		tupleStudentGrades30 = conversion.dictType1(dictStudentGrades30)
-		
 		tupleStudentGrades100 = conversion.dictType1(dictStudentGrades100)
 	}
 	//-------------------------------
@@ -115,44 +119,34 @@ class TableViewDatas: UIViewController,
 		
 		if switch_gradeOn.isOn == false
 		{
-			for i in 0..<tupleStudentGrades30[indexPath.row].arr.count
-			{
-				if let studentName = cell.viewWithTag(100) as! UILabel!
-				{ studentName.text = tupleStudentGrades30[indexPath.row].str1 }
-				
-				if let courseName = cell.viewWithTag(200) as! UILabel!
-				{ courseName.text = tupleStudentGrades30[indexPath.row].arr[i].str2 }
-				
-				if let grade1 = cell.viewWithTag(301) as! UILabel!
-				{ grade1.text = String(tupleStudentGrades30[indexPath.row].arr[i].num1) }
-				
-				if let grade2 = cell.viewWithTag(302) as! UILabel!
-				{ grade2.text = String(tupleStudentGrades30[indexPath.row].arr[i].num2) }
-				
-				if let grade3 = cell.viewWithTag(303) as! UILabel!
-				{ grade3.text = String(tupleStudentGrades30[indexPath.row].arr[i].num3) }
-			}
+			if let studentName = cell.viewWithTag(100) as! UILabel!
+			{ studentName.text = tupleStudentGrades30[indexPath.row].str1 }
 			
+			if let courseName = cell.viewWithTag(200) as! UILabel!
+			{ courseName.text = tupleStudentGrades30[indexPath.row].arr[indexPath.row].str2 }
+			
+			if let grade1 = cell.viewWithTag(301) as! UILabel!
+			{ grade1.text = String(tupleStudentGrades30[indexPath.row].arr[indexPath.row].num1) }
+			
+			if let grade2 = cell.viewWithTag(302) as! UILabel!
+			{ grade2.text = String(tupleStudentGrades30[indexPath.row].arr[indexPath.row].num2) }
+			
+			if let grade3 = cell.viewWithTag(303) as! UILabel!
+			{ grade3.text = String(tupleStudentGrades30[indexPath.row].arr[indexPath.row].num3) }
 		}
 		else
 		{
-			for j in 0..<tupleStudentGrades100[indexPath.row].arr.count
-			{
-				if let studentName = cell.viewWithTag(100) as! UILabel!
-				{ studentName.text = tupleStudentGrades100[indexPath.row].str1 }
-				
-				if let courseName = cell.viewWithTag(200) as! UILabel!
-				{ courseName.text = tupleStudentGrades100[indexPath.row].arr[j].str2 }
-				
-				if let grade1 = cell.viewWithTag(301) as! UILabel!
-				{ grade1.text = String(tupleStudentGrades100[indexPath.row].arr[j].num1) }
-				
-				if let grade2 = cell.viewWithTag(302) as! UILabel!
-				{ grade2.text = String(tupleStudentGrades100[indexPath.row].arr[j].num2) }
-				
-				if let grade3 = cell.viewWithTag(303) as! UILabel!
-				{ grade3.text = String(tupleStudentGrades100[indexPath.row].arr[j].num3) }
-			}
+			if let studentName = cell.viewWithTag(100) as! UILabel!
+			{ studentName.text = tupleStudentGrades100[indexPath.row].str1 }
+			
+			if let courseName = cell.viewWithTag(200) as! UILabel!
+			{ courseName.text = tupleStudentGrades100[indexPath.row].arr[indexPath.row].str2 }
+			
+			if let grade1 = cell.viewWithTag(301) as! UILabel!
+			{ grade1.text = String(tupleStudentGrades100[indexPath.row].arr[indexPath.row].num1) }
+			
+			if let grade2 = cell.viewWithTag(302) as! UILabel!
+			{ grade2.text = String(tupleStudentGrades100[indexPath.row].arr[indexPath.row].num2) }
 		}
 		return cell
 	}
