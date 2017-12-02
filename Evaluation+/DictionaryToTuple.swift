@@ -1,10 +1,10 @@
-//
-//  DictionaryToTuple.swift
-//  Evaluation+
-//
-//  Created by Marcos Gomes on 17-12-02.
-//  Copyright © 2017 Concordia Continuing Education (CCE). All rights reserved.
-//
+/*
+  DictionaryToTuple.swift
+  Evaluation+
+
+  Created by Marcos Gomes on 17-12-02.
+  Copyright © 2017 Concordia Continuing Education (CCE). All rights reserved.
+*/
 
 import Foundation
 

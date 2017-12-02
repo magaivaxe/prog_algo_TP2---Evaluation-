@@ -11,25 +11,17 @@ import UIKit
 //-------------------------------
 
 class TableViewDatas: UIViewController,
-					  UITextFieldDelegate,
 					  UITableViewDelegate,
 					  UITableViewDataSource
 {
 	//----------- Outlets -----------
-	@IBOutlet weak var weight1: UITextField!
-	@IBOutlet weak var weight2: UITextField!
-	@IBOutlet weak var weight3: UITextField!
-	
 	@IBOutlet weak var switch_gradeOn: UISwitch!
 	@IBOutlet weak var table_view: UITableView!
 	
-	@IBOutlet weak var avarage: UIButton!
+
 	@IBOutlet weak var return_button: UIButton!
 	//- Static -
-	@IBOutlet weak var label_weights: UILabel!
-	@IBOutlet weak var label_grade1: UILabel!
-	@IBOutlet weak var label_grade2: UILabel!
-	@IBOutlet weak var label_grade3: UILabel!
+
 	@IBOutlet weak var label_gradeOn30: UILabel!
 	@IBOutlet weak var label_gradeOn100: UILabel!
 	//-------------------------------
@@ -135,13 +127,6 @@ class TableViewDatas: UIViewController,
 		return cell
 	}
 	//-------------------------------
-	//=============================================================================
-	//================================= Keyboard ==================================
-	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
-	{ self.view.endEditing(true) }
-	
-	func textFieldShouldReturn(_ textField: UITextField) -> Bool
-	{ textField.resignFirstResponder(); return true }
 	//=============================================================================
 }
 
