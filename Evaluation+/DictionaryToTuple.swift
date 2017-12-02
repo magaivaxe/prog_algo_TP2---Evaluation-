@@ -10,7 +10,7 @@ import Foundation
 
 class DictionaryToTuple
 {
-	func dictType1(dict d: [String:[String:[Double]]]) ->
+	func dictType1(_ d: [String:[String:[Double]]]) ->
 		[(str1: String, arr: [(str2: String, num1: Double, num2: Double, num3: Double)])]
 	{
 		var tupleToReturn = [(str1: String, arr: [(str2: String, num1: Double, num2: Double, num3: Double)])]()
@@ -18,29 +18,41 @@ class DictionaryToTuple
 		let arrayDictKey = [String](d.keys)
 		/* array to receive the main dictionary values */
 		let arrayDictValue = [[String:[Double]]](d.values)
+		/* array to receive the Double array */
+		var arrayIntern = [(str2: String, num1: Double, num2: Double, num3: Double)]()
+		/* variables to receive the Doubles values from Double array */
+		var n1: Double = 0; var n2: Double = 0; var n3: Double = 0
+		/* the key from secondary dictionary */
+		var keyFromValue: String = ""
 		
-		var i = 0; while i < d.count
+		for dictkey in arrayDictKey
 		{
-			tupleToReturn[i].str1 = arrayDictKey[i]			 /* Main keys*/
+			let mainKey = dictkey		/* Main keys*/
 			
-			for j in 0..<arrayDictValue.count
+			for dictvalue in arrayDictValue
 			{
 				/* array to receive the dictionary keys of main dictionary values */
-				let keyDictValue = [String](arrayDictValue[j].keys)
-				/* array to receive the dictionary values of main dictionary values */
-				let valueDictValue = [[Double]](arrayDictValue[i].values)
-				/* secondary keys */
-				tupleToReturn[i].arr[j].str2 = keyDictValue[j]
-				/* secondary values */
-				tupleToReturn[i].arr[j].num1 = valueDictValue[0][j]
-				tupleToReturn[i].arr[j].num2 = valueDictValue[0][j + 1]
-				tupleToReturn[i].arr[j].num3 = valueDictValue[0][j + 2]
+				let arrayKeyDictValue = [String](dictvalue.keys)
+				
+				for KeyDictValue in arrayKeyDictValue
+				{
+					keyFromValue = KeyDictValue
+					/* Doubles array */
+					let arrayValueDictValue = [[Double]](dictvalue.values)
+					/* the double values */
+					for thedictValues in arrayValueDictValue
+					{
+						let value = thedictValues
+						
+						n1 = value[0]
+						n2 = value[1]
+						n3 = value[2]
+					}
+					arrayIntern.append((keyFromValue, n1, n2, n3))
+				}
 			}
-			i = i + 1
+			tupleToReturn.append((mainKey, arrayIntern))
 		}
-		
 		return tupleToReturn
 	}
-	
-	
 }

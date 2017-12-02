@@ -86,6 +86,11 @@ class StudentsGrades: UIViewController,
 		load()
 		//----
 		
+		//----
+		label_name.text = studentName												/* Show current name */
+		grade30_1 = 0; grade30_2 = 0; grade30_3 = 0									/* Initial grades values */
+		grade100_1 = 0; grade100_2 = 0; grade100_3 = 0
+		//----
     }
 	//=============================================================================
     //======================== Switch, Segmented and Sliders ======================
@@ -245,6 +250,7 @@ class StudentsGrades: UIViewController,
 			alert(title: "No criterias!",
 				  message: "Please set the all criterias for total grade calculus.",
 				  tag: 2)
+			return
 		}
 		
         let calculate = Calculate()
@@ -253,8 +259,6 @@ class StudentsGrades: UIViewController,
 		weight1 = Double(field_weight1.text!)!; weight2 = Double(field_weight2.text!)!
 		weight3 = Double(field_weight3.text!)!; weight4 = Double(field_weight4.text!)!
 		weight5 = Double(field_weight5.text!)!
-		
-		
         
 		arrayWeights = [weight1, weight2, weight3, weight4, weight5]
         arrayCriterias = [criteria1, criteria2, criteria3, criteria4, criteria5]
@@ -329,12 +333,12 @@ class StudentsGrades: UIViewController,
 		dictStudentGrades100.updateValue([currentCourse!: arrayGrades100],
 										 forKey: studentName)				/* Add the values to dictionary100 */
 		
-		save.saveData(theData: dictStudentGrades30 as AnyObject,
+		save.saveData(theData: dictStudentGrades30 as AnyObject,			/* Save the dictionaries to load */
 					  fileName: "dictionary30")
 		save.saveData(theData: dictStudentGrades100 as AnyObject,
 					  fileName: "dictionary100")
-		save.saveData(theData: arrayWeights as AnyObject,
-					  fileName: "weights")	/* Save the weights to load */
+		
+		save.saveData(theData: arrayWeights as AnyObject, fileName: "weights")	/* Save the weights to load */
 	//-------------------------------
     }
 	//=============================================================================
@@ -399,14 +403,10 @@ class StudentsGrades: UIViewController,
 		let load = SaveLoadMenager()
 		
 		studentName = load.loadData(fileName: "student") as! String					/* Student name load */
-		label_name.text = studentName												/* Show current name */
+		arrayCourses = load.loadData(fileName: "coursesData") as! [String]			/* Load the courses array */
 		
-		arrayCourses = load.loadData(fileName: "coursesData") as! [String]	/* Disciplines array */
-		
-		grade30_1 = 0; grade30_2 = 0; grade30_3 = 0
-		grade100_1 = 0; grade100_2 = 0; grade100_3 = 0
-		
-		if load.checkExistingSaves(fileName: "weights") == true						/* Load the weights */
+		//-----------------------------------------------------------:) Load the weights
+		if load.checkExistingSaves(fileName: "weights") == true
 		{
 			arrayWeights = load.loadData(fileName: "weights") as! [Double]
 			
@@ -424,6 +424,25 @@ class StudentsGrades: UIViewController,
 			
 			load.saveData(theData: arrayWeights as AnyObject, fileName: "weights")
 		}
+		
+		//-----------------------------------------------------------:) Load the dictionaries
+		if load.checkExistingSaves(fileName: "dictionary30") == true
+		{
+			dictStudentGrades30 = load.loadData(fileName: "dictionary30") as! [String:[String:[Double]]]
+		}
+		else
+		{
+			load.saveData(theData: dictStudentGrades30 as AnyObject, fileName: "dictionary30")
+		}
+		if load.checkExistingSaves(fileName: "dictionary100") == true
+		{
+			dictStudentGrades100 = load.loadData(fileName: "dictionary100") as! [String:[String:[Double]]]
+		}
+		else
+		{
+			load.saveData(theData: dictStudentGrades100 as AnyObject, fileName: "dictionary100")
+		}
+		
 	}
 	//-------------------------------
     //=============================================================================

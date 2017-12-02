@@ -37,6 +37,7 @@ class TableViewDatas: UIViewController,
 	
 	typealias student = String
 	typealias course = String
+	typealias grade = Double
 	typealias grades = [Double]
 	
 	var weights1, weights2, weights3: Double!
@@ -44,13 +45,9 @@ class TableViewDatas: UIViewController,
 	
 	var dictStudentGrades30 = [String:[String:[Double]]]()
 	var dictStudentGrades100 = [String:[String:[Double]]]()
-	var arrayCourses = [String]()
-	var arrayDictGrades = [[String:[Double]]]()
-	var arrayStudents = [String]()
-	var arrayGrades = [Double]()
 	
-	var tupleStudentGrades30 = [(student: String, course: String, grade1: Double, grade2: Double, grade3: Double)]()
-	var tupleStudentGrades100 = [(student: String, course: String, grade1: Double, grade2: Double, grade3: Double)]()
+	var tupleStudentGrades30 = [(str1: student, arr: [(str2: course, num1: grade, num2: grade, num3: grade)])]()
+	var tupleStudentGrades100 = [(str1: student, arr: [(str2: course, num1: grade, num2: grade, num3: grade)])]()
 	//-------------------------------
 	//================================ viewDidLoad ================================
     override func viewDidLoad()
@@ -60,22 +57,23 @@ class TableViewDatas: UIViewController,
 		//----
 		loads()
 		//----
-		
+		setTuple()
 		//----
     }
 	//=============================================================================
+	//======================== Switch, Segmented and Sliders ======================
+	
+	
+	//=============================================================================
 	//================================ Functions ==================================
 	//----------- Arrays ------------		/* Function to set the arrays */
-	func setArrays()
+	func setTuple()
 	{
-		if switch_gradeOn.isOn == false		/* grade on 30 */
-		{
-			
-		}
-		else								/* grade on 100 */
-		{
-			
-		}
+		let conversion = DictionaryToTuple()
+		
+		tupleStudentGrades30 = conversion.dictType1(dictStudentGrades30)
+		
+		tupleStudentGrades100 = conversion.dictType1(dictStudentGrades100)
 	}
 	//-------------------------------
 	//------------ Loads ------------
@@ -115,39 +113,46 @@ class TableViewDatas: UIViewController,
 	{
 		let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell")!
 		
-		if switch_gradeOn.isOn == true
+		if switch_gradeOn.isOn == false
 		{
-//			if let studentName = cell.viewWithTag(100) as! UILabel!
-//			{ studentName.text = [String]((dictStudentGrades.values)[indexPath.row]) }
-//
-//			if let courseName = cell.viewWithTag(200) as! UILabel!
-//			{ courseName.text = String((arrayCourses_30)[indexPath.row]) }
-//
-//			if let grade1 = cell.viewWithTag(301) as! UILabel!
-//			{ grade1.text = String((arrayGrade1_30)[indexPath.row]) }
-//
-//			if let grade2 = cell.viewWithTag(302) as! UILabel!
-//			{ grade2.text = String((arrayGrade2_30)[indexPath.row]) }
-//
-//			if let grade3 = cell.viewWithTag(303) as! UILabel!
-//			{ grade3.text = String((arrayGrade3_30)[indexPath.row]) }
+			for i in 0..<tupleStudentGrades30[indexPath.row].arr.count
+			{
+				if let studentName = cell.viewWithTag(100) as! UILabel!
+				{ studentName.text = tupleStudentGrades30[indexPath.row].str1 }
+				
+				if let courseName = cell.viewWithTag(200) as! UILabel!
+				{ courseName.text = tupleStudentGrades30[indexPath.row].arr[i].str2 }
+				
+				if let grade1 = cell.viewWithTag(301) as! UILabel!
+				{ grade1.text = String(tupleStudentGrades30[indexPath.row].arr[i].num1) }
+				
+				if let grade2 = cell.viewWithTag(302) as! UILabel!
+				{ grade2.text = String(tupleStudentGrades30[indexPath.row].arr[i].num2) }
+				
+				if let grade3 = cell.viewWithTag(303) as! UILabel!
+				{ grade3.text = String(tupleStudentGrades30[indexPath.row].arr[i].num3) }
+			}
+			
 		}
 		else
 		{
-//			if let studentName = cell.viewWithTag(100) as! UILabel!
-//			{ studentName.text = String((arrayStudents_100)[indexPath.row]) }
-//
-//			if let courseName = cell.viewWithTag(200) as! UILabel!
-//			{ courseName.text = String((arrayCourses_100)[indexPath.row]) }
-//
-//			if let grade1 = cell.viewWithTag(301) as! UILabel!
-//			{ grade1.text = String((arrayGrade1_100)[indexPath.row]) }
-//
-//			if let grade2 = cell.viewWithTag(302) as! UILabel!
-//			{ grade2.text = String((arrayGrade2_100)[indexPath.row]) }
-//
-//			if let grade3 = cell.viewWithTag(303) as! UILabel!
-//			{ grade3.text = String((arrayGrade3_100)[indexPath.row]) }
+			for j in 0..<tupleStudentGrades100[indexPath.row].arr.count
+			{
+				if let studentName = cell.viewWithTag(100) as! UILabel!
+				{ studentName.text = tupleStudentGrades100[indexPath.row].str1 }
+				
+				if let courseName = cell.viewWithTag(200) as! UILabel!
+				{ courseName.text = tupleStudentGrades100[indexPath.row].arr[j].str2 }
+				
+				if let grade1 = cell.viewWithTag(301) as! UILabel!
+				{ grade1.text = String(tupleStudentGrades100[indexPath.row].arr[j].num1) }
+				
+				if let grade2 = cell.viewWithTag(302) as! UILabel!
+				{ grade2.text = String(tupleStudentGrades100[indexPath.row].arr[j].num2) }
+				
+				if let grade3 = cell.viewWithTag(303) as! UILabel!
+				{ grade3.text = String(tupleStudentGrades100[indexPath.row].arr[j].num3) }
+			}
 		}
 		return cell
 	}

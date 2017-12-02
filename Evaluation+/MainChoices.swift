@@ -28,8 +28,8 @@ class MainChoices: UIViewController,
 	@IBOutlet weak var table_view: UITableView!
 	//-------------------------------
 	//---------- Variables ----------
-	var arrayStudents: [String]!; var arrayDisciplines: [String]!
-	var sortedArrayStudents: [String]!; var sortedArrayDisciplines: [String]!
+	var arrayStudents: [String]!; var arrayCourses: [String]!
+	var sortedArrayStudents: [String]!; var sortedArrayCourses: [String]!
 	
 	var tagField: Int!
 	//-------------------------------
@@ -85,11 +85,11 @@ class MainChoices: UIViewController,
 		}
 		else
 		{
-			arrayDisciplines.append(disciplineName)
+			arrayCourses.append(disciplineName)
 			field_discipline_name.text?.removeAll()
 		}
 		save.saveData(theData: arrayStudents as AnyObject, fileName: "studentsData")
-		save.saveData(theData: arrayDisciplines as AnyObject, fileName: "disciplinesData")
+		save.saveData(theData: arrayCourses as AnyObject, fileName: "coursesData")
 		
 		sorted()
 	}
@@ -113,7 +113,7 @@ class MainChoices: UIViewController,
     func sorted()
     {
         sortedArrayStudents = arrayStudents.sorted()
-        sortedArrayDisciplines = arrayDisciplines.sorted()
+        sortedArrayCourses = arrayCourses.sorted()
         
         table_view.reloadData()
     }
@@ -160,16 +160,16 @@ class MainChoices: UIViewController,
 		let load = SaveLoadMenager()
 		
 		if load.checkExistingSaves(fileName: "studentsData") == true,
-		   load.checkExistingSaves(fileName: "disciplinesData") == true
+		   load.checkExistingSaves(fileName: "coursesData") == true
 		{
 			arrayStudents = load.loadData(fileName: "studentsData") as! [String]
-			arrayDisciplines = load.loadData(fileName: "disciplinesData") as! [String]
+			arrayCourses = load.loadData(fileName: "coursesData") as! [String]
 		}
 		else
 		{
-			arrayStudents = [String](); arrayDisciplines = [String]()
+			arrayStudents = [String](); arrayCourses = [String]()
 			load.saveData(theData: arrayStudents as AnyObject, fileName: "studentsData")
-			load.saveData(theData: arrayDisciplines as AnyObject, fileName: "disciplinesData")
+			load.saveData(theData: arrayCourses as AnyObject, fileName: "coursesData")
 		}
 		sorted()
 	}
@@ -198,7 +198,7 @@ class MainChoices: UIViewController,
 		}
 		else
 		{
-			return sortedArrayDisciplines.count
+			return sortedArrayCourses.count
 		}
 	}
 	//-------------------------------
@@ -215,7 +215,7 @@ class MainChoices: UIViewController,
 		}
 		else														/* Disciplines */
 		{
-			cell.textLabel?.text = "\(sortedArrayDisciplines[indexPath.row])"
+			cell.textLabel?.text = "\(sortedArrayCourses[indexPath.row])"
 		}
 		return cell
 	}
@@ -232,7 +232,7 @@ class MainChoices: UIViewController,
 			let student = [String](sortedArrayStudents)[indexPath.row]
 			save.saveData(theData: student as AnyObject, fileName: "student")
 			
-			if sortedArrayDisciplines != [String]()
+			if sortedArrayCourses != [String]()
 			{
 				performSegue(withIdentifier: "segueStudent", sender: nil)
 			}
@@ -276,13 +276,13 @@ class MainChoices: UIViewController,
 		{
 			if editingStyle == UITableViewCellEditingStyle.delete
 			{
-                var j = 0; while j < arrayDisciplines.count
+                var j = 0; while j < arrayCourses.count
                 {
-                    if sortedArrayDisciplines[indexPath.row] == arrayDisciplines[j]
+                    if sortedArrayCourses[indexPath.row] == arrayCourses[j]
                     {
-                        sortedArrayDisciplines.remove(at: indexPath.row)
-                        arrayDisciplines.remove(at: j)
-                        save.saveData(theData: arrayDisciplines as AnyObject, fileName: "disciplinesData")
+                        sortedArrayCourses.remove(at: indexPath.row)
+                        arrayCourses.remove(at: j)
+                        save.saveData(theData: arrayCourses as AnyObject, fileName: "coursesData")
                         tableView.deleteRows(at: [indexPath as IndexPath], with: UITableViewRowAnimation.automatic)
                         tableView.reloadData()
                         return
