@@ -40,9 +40,6 @@ class TableViewDatas: UIViewController,
 	typealias grade = Double
 	typealias grades = [Double]
 	
-	var weights1, weights2, weights3, averageNumber30, averageNumber100: Double!
-	var arrayWeights: [Double]!
-	
 	var dictStudentGrades30 = [String:[String:[Double]]]()
 	var dictStudentGrades100 = [String:[String:[Double]]]()
 	
@@ -88,19 +85,6 @@ class TableViewDatas: UIViewController,
 		dictStudentGrades30 = load.loadData(fileName: "dictionary30") as! [student:[course:grades]]
 		dictStudentGrades100 = load.loadData(fileName: "dictionary100") as! [student:[course:grades]]
 		
-		if load.checkExistingSaves(fileName: "weightsAverage") == true
-		{
-			arrayWeights = load.loadData(fileName: "weightsAverage") as! [Double]
-			weight1.text = String(arrayWeights[0]); weight2.text = String(arrayWeights[1])
-			weight3.text = String(arrayWeights[2])
-		}
-		else
-		{
-			weights1 = Double(weight1.text!)!; weights2 = Double(weight2.text!)!
-			weights3 = Double(weight3.text!)!
-			arrayWeights = [weights1, weights2, weights3]
-			load.saveData(theData: arrayWeights as AnyObject, fileName: "weightsAverage")
-		}
 	}
 	//-------------------------------
 	//=============================================================================
