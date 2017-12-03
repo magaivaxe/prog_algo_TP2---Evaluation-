@@ -73,25 +73,142 @@ class StudentsGrades: UIViewController,
 	
 	var arrayWeights, arrayCriterias,
 		arrayGrades30, arrayGrades100: [Double]!
-	var arrayGrades: [Double]!
-	
-	
+	var arrayGrades: [Double]!;
+	var arraySliders: [UISlider]!; var arrayLabels: [UILabel]!
+	var arrayFields: [UITextField]!; var arrayButtons: [UIButton]!
 	//-------------------------------
 	//================================ viewDidLoad ================================
     override func viewDidLoad()
     {
         super.viewDidLoad()
-		
+		//----
+		let style = Styles()
 		//----
 		load()
 		//----
+		arraysToStyle()
+		//----
 		
 		//----
-		label_name.text = studentName												/* Show current name */
-		grade30_1 = 0; grade30_2 = 0; grade30_3 = 0									/* Initial grades values */
+		label_name.text = studentName						/* Show current name */
+		grade30_1 = 0; grade30_2 = 0; grade30_3 = 0			/* Initial grades values */
 		grade100_1 = 0; grade100_2 = 0; grade100_3 = 0
 		//----
     }
+	//=============================================================================
+	//================================ Functions ==================================
+	func arraysToStyle()
+	{
+		arrayButtons = [button_return, button_classrooms]
+		arraySliders = [slider_criteria1, slider_criteria2, slider_criteria3,
+						slider_criteria4, slider_criteria5]
+		arrayFields = [field_weight1, field_weight2, field_weight3,
+					   field_weight4, field_weight5]
+		arrayLabels = [label_name, label_grade1, label_grade2,
+					   label_grade3, label_grade4, label_grade5, label_final_grade]
+	}
+	//------------ Alerts -----------
+	func alert(title t: String,
+			   message m: String,
+			   tag: Int)
+	{
+		//- Alert -			/* contants */
+		let alert =  UIAlertController(title: t,
+									   message: m,
+									   preferredStyle: UIAlertControllerStyle.alert)
+		//- Buttons -
+		if tag == 1			/* Save or go */
+		{
+			alert.addAction(UIAlertAction(title: "Yes",
+										  style: UIAlertActionStyle.default,
+										  handler: { (action) in
+											alert.dismiss(animated: true, completion: nil)
+			}))
+			alert.addAction(UIAlertAction(title: "No and Go",
+										  style: UIAlertActionStyle.default,
+										  handler: { (action) in
+			alert.dismiss(animated: true, completion: nil)
+											
+			self.performSegue(withIdentifier: "segueTableView", sender: nil)
+			}))
+		}
+		
+		if tag == 2			/* Alert simple */
+		{
+			alert.addAction(UIAlertAction(title: "Ok",
+										  style: UIAlertActionStyle.default,
+										  handler: { (action) in
+			alert.dismiss(animated: true, completion: nil)
+			}))
+		}
+		
+		if tag == 3			/* Return to add student */
+		{
+			alert.addAction(UIAlertAction(title: "Yes",
+										  style: UIAlertActionStyle.default,
+										  handler: { (action) in
+			alert.dismiss(animated: true, completion: nil)
+											
+			self.performSegue(withIdentifier: "segueReturn", sender: nil)
+			}))
+			
+			alert.addAction(UIAlertAction(title: "No",
+										  style: UIAlertActionStyle.default,
+										  handler: { (action) in
+											alert.dismiss(animated: true, completion: nil)
+			}))
+		}
+		self.present(alert, animated: true, completion: nil)
+	}
+	//-------------------------------
+	//--------- Data loads ----------
+	func load()
+	{
+		let load = SaveLoadMenager()
+		
+		studentName = load.loadData(fileName: "student") as! String					/* Student name load */
+		arrayCourses = load.loadData(fileName: "coursesData") as! [String]			/* Load the courses array */
+		
+		//-----------------------------------------------------------:) Load the weights
+		if load.checkExistingSaves(fileName: "weights") == true
+		{
+			arrayWeights = load.loadData(fileName: "weights") as! [Double]
+			
+			field_weight1.text! = String(arrayWeights[0]); field_weight2.text! = String(arrayWeights[1])
+			field_weight3.text! = String(arrayWeights[2]); field_weight4.text! = String(arrayWeights[3])
+			field_weight5.text! = String(arrayWeights[4])
+		}
+		else
+		{
+			weight1 = Double(field_weight1.text!)!; weight2 = Double(field_weight2.text!)!
+			weight3 = Double(field_weight3.text!)!; weight4 = Double(field_weight4.text!)!
+			weight5 = Double(field_weight5.text!)!
+			
+			arrayWeights = [weight1, weight2, weight3, weight4, weight5]
+			
+			load.saveData(theData: arrayWeights as AnyObject, fileName: "weights")
+		}
+		
+		//-----------------------------------------------------------:) Load the dictionaries
+		if load.checkExistingSaves(fileName: "dictionary30") == true
+		{
+			dictStudentGrades30 = load.loadData(fileName: "dictionary30") as! [String:[String:[Double]]]
+		}
+		else
+		{
+			load.saveData(theData: dictStudentGrades30 as AnyObject, fileName: "dictionary30")
+		}
+		if load.checkExistingSaves(fileName: "dictionary100") == true
+		{
+			dictStudentGrades100 = load.loadData(fileName: "dictionary100") as! [String:[String:[Double]]]
+		}
+		else
+		{
+			load.saveData(theData: dictStudentGrades100 as AnyObject, fileName: "dictionary100")
+		}
+		
+	}
+	//-------------------------------
 	//=============================================================================
     //======================== Switch, Segmented and Sliders ======================
 	//------------ Switch -----------
@@ -342,110 +459,7 @@ class StudentsGrades: UIViewController,
 	//-------------------------------
     }
 	//=============================================================================
-    //================================ Functions ==================================
-	//------------ Alerts -----------
-	func alert(title t: String,
-			   message m: String,
-			   tag: Int)
-	{
-		//- Alert -			/* contants */
-		let alert =  UIAlertController(title: t,
-									   message: m,
-									   preferredStyle: UIAlertControllerStyle.alert)
-		//- Buttons -
-		if tag == 1			/* Save or go */
-		{
-		alert.addAction(UIAlertAction(title: "Yes",
-									  style: UIAlertActionStyle.default,
-									  handler: { (action) in
-			alert.dismiss(animated: true, completion: nil)
-		}))
-		alert.addAction(UIAlertAction(title: "No and Go",
-									  style: UIAlertActionStyle.default,
-									  handler: { (action) in
-			alert.dismiss(animated: true, completion: nil)
-			
-			self.performSegue(withIdentifier: "segueTableView", sender: nil)
-		}))
-		}
-        
-        if tag == 2			/* Alert simple */
-        {
-            alert.addAction(UIAlertAction(title: "Ok",
-                                          style: UIAlertActionStyle.default,
-                                          handler: { (action) in
-        	alert.dismiss(animated: true, completion: nil)
-            }))
-        }
-		
-		if tag == 3			/* Return to add student */
-		{
-			alert.addAction(UIAlertAction(title: "Yes",
-										  style: UIAlertActionStyle.default,
-										  handler: { (action) in
-			alert.dismiss(animated: true, completion: nil)
-											
-			self.performSegue(withIdentifier: "segueReturn", sender: nil)
-			}))
-			
-			alert.addAction(UIAlertAction(title: "No",
-										  style: UIAlertActionStyle.default,
-										  handler: { (action) in
-			alert.dismiss(animated: true, completion: nil)
-			}))
-		}
-		self.present(alert, animated: true, completion: nil)
-	}
-	//-------------------------------
-	//--------- Data loads ----------
-	func load()
-	{
-		let load = SaveLoadMenager()
-		
-		studentName = load.loadData(fileName: "student") as! String					/* Student name load */
-		arrayCourses = load.loadData(fileName: "coursesData") as! [String]			/* Load the courses array */
-		
-		//-----------------------------------------------------------:) Load the weights
-		if load.checkExistingSaves(fileName: "weights") == true
-		{
-			arrayWeights = load.loadData(fileName: "weights") as! [Double]
-			
-			field_weight1.text! = String(arrayWeights[0]); field_weight2.text! = String(arrayWeights[1])
-			field_weight3.text! = String(arrayWeights[2]); field_weight4.text! = String(arrayWeights[3])
-			field_weight5.text! = String(arrayWeights[4])
-		}
-		else
-		{
-			weight1 = Double(field_weight1.text!)!; weight2 = Double(field_weight2.text!)!
-			weight3 = Double(field_weight3.text!)!; weight4 = Double(field_weight4.text!)!
-			weight5 = Double(field_weight5.text!)!
-			
-			arrayWeights = [weight1, weight2, weight3, weight4, weight5]
-			
-			load.saveData(theData: arrayWeights as AnyObject, fileName: "weights")
-		}
-		
-		//-----------------------------------------------------------:) Load the dictionaries
-		if load.checkExistingSaves(fileName: "dictionary30") == true
-		{
-			dictStudentGrades30 = load.loadData(fileName: "dictionary30") as! [String:[String:[Double]]]
-		}
-		else
-		{
-			load.saveData(theData: dictStudentGrades30 as AnyObject, fileName: "dictionary30")
-		}
-		if load.checkExistingSaves(fileName: "dictionary100") == true
-		{
-			dictStudentGrades100 = load.loadData(fileName: "dictionary100") as! [String:[String:[Double]]]
-		}
-		else
-		{
-			load.saveData(theData: dictStudentGrades100 as AnyObject, fileName: "dictionary100")
-		}
-		
-	}
-	//-------------------------------
-    //=============================================================================
+	
     //================================ Table View =================================
 	//--------- Cells number --------
     func tableView(_ tableView: UITableView,

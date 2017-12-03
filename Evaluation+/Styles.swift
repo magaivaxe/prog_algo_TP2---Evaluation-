@@ -35,22 +35,22 @@ class Styles
 	func styleArrayOfUIButtons(_ buttons: [UIButton],
 	                           _ fontN: UIFont?,
 	                           _ fontColor: UIColor?,
-	                           _ radius: CGFloat?,
-	                           _ borderWidthN: CGFloat?,
+	                           _ radius: CGFloat,
+	                           _ borderWidthN: CGFloat,
 	                           _ borderColorN: CGColor?,
 	                           _ bgroundColor: CGColor?,
-							   _ alphaN: CGFloat?)
+							   _ alphaN: CGFloat)
 	{
 		for b in buttons
 		{
 			b.clipsToBounds = true
-			b.layer.cornerRadius = radius!
-			b.layer.borderWidth = borderWidthN!
+			b.layer.cornerRadius = radius
+			b.layer.borderWidth = borderWidthN
 			b.layer.borderColor = borderColorN!
 			b.layer.backgroundColor = bgroundColor!
 			b.titleLabel?.font = fontN!
 			b.titleLabel?.textColor = fontColor!
-			b.alpha = alphaN!
+			b.alpha = alphaN
 		}
 	}
 	//------------------
@@ -196,16 +196,16 @@ class Styles
     }
 	
 	func styleUIImageView(_ imageView: UIImageView,
-	                      _ radius: CGFloat?,
 						  _ imageI: UIImage?,
-						  _ borderWidthN: CGFloat?,
+						  _ radius: CGFloat,
+						  _ borderWidthN: CGFloat,
 						  _ borderColorN: CGColor?)
 	{
 		imageView.clipsToBounds = true
 		imageView.image = imageI!					/* UIImage(named: "name")*/
-		imageView.layer.cornerRadius = radius!
-		imageView.layer.borderWidth = borderWidthN!
-		imageView.layer.borderColor = borderColorN!
+		imageView.layer.cornerRadius = radius
+		imageView.layer.borderWidth = borderWidthN
+		imageView.layer.borderColor = borderColorN
 	}
 	
 	func styleArrayOfImageViews(_ imageView: [UIImageView],
@@ -222,6 +222,20 @@ class Styles
 			iv.layer.borderWidth = borderWidthN!
 			iv.layer.borderColor = borderColorN!
 		}
+	}
+	
+	func styleUIView(_ view: UIView,
+					 _ radius: CGFloat?,
+					 _ borderWidthN: CGFloat?,
+					 _ borderColorN: CGColor?,
+					 _ bgroundColor: UIColor?,
+					 _ alphaN: CGFloat?)
+	{
+		view.layer.cornerRadius = radius!
+		view.layer.borderWidth = borderWidthN!
+		view.layer.borderColor = borderColorN!
+		view.backgroundColor = bgroundColor!
+		view.alpha = alphaN!
 	}
 	//=======================================================
 }

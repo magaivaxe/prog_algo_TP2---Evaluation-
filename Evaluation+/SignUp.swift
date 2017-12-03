@@ -30,16 +30,35 @@ class SignUp: UIViewController, UITextFieldDelegate
 	//-------------------------------
 	
 	//----------- var/let -----------
-	var identification: String!
-	var username: String!
-	var emailAddress: String!
-	var password: String!
+	var identification, username, emailAddress, password: String!
+	var arrayTextFields: [UITextField]!
 	var userData: [String]!
 	//-------------------------------
 	
     override func viewDidLoad()
 	{
         super.viewDidLoad()
+		//----
+		let style = Styles()
+		//----
+		arraysToStyle()
+		//----
+		style.styleUIImageView(imgViewLogo, UIImage.init(named: "logo.png"), 0, 0, UIColor.white.cgColor)
+		
+		style.styleUIView(viewSignUp, 10, 1,
+						  UIColor.init(red: 209/255, green: 213/255, blue: 218/255, alpha: 1).cgColor,
+						  UIColor.white, 1)
+		
+		style.styleArrayOfUITextField(arrayTextFields, UIFont.init(name: "Champagne & Limousines", size: 17),
+									  10, 0.7, UIColor.init(red: 209/255, green: 213/255, blue: 218/255, alpha: 1).cgColor,
+									  UIColor.white.cgColor)
+		
+		style.styleUIButtons(buttonSignUp, "Sign Up", UIFont.init(name: "Champagne & Limousines", size: 17),
+							 UIColor.init(red: 111/255, green: 113/255, blue: 121/255, alpha: 1), 10, 1,
+							 UIColor.init(red: 243/255, green: 203/255, blue: 116/255, alpha: 1).cgColor,
+							 UIColor.init(red: 254/255, green: 212/255, blue: 128/255, alpha: 1).cgColor, 1)
+		//----
+		
     }
 
 	@IBAction func SignUp(_ sender: UIButton)
@@ -50,7 +69,6 @@ class SignUp: UIViewController, UITextFieldDelegate
 		username = fieldUsername.text!
 		emailAddress = fieldEmailAddress.text!
 		password = fieldPassword.text!
-		
 		//- Condotions to fail -
 		if (identification == "" && username == "" &&
 			emailAddress == "" && password == "")
@@ -77,26 +95,27 @@ class SignUp: UIViewController, UITextFieldDelegate
 		fieldPassword.text?.removeAll()
 		
 		//-- Back to Sign In ---
-		
 		alert1(title: "Accomplished!", message: "Username and password successfully created.", tag: 2)
-		
 		//----------------------
 		
 	}
-	
 	//================================= Functions =================================
-	
+	//----------- Alerts Fonctions ------------
+	func arraysToStyle()
+	{
+		arrayTextFields = [fieldPassword, fieldUsername, fieldEmailAddress, fieldConcoIdentification]
+	}
+	//-----------------------------------------
 	//----------- Alerts Fonctions ------------
 	func alert1(title t: String,
 				message m: String,
 				tag: Int)
 	{
 		//- Alerts -
-		let alert = UIAlertController(title: t,
+		let alert = UIAlertController(title: t,			// Constant wich go to show message and title alert
 									  message: m,
-									  preferredStyle: UIAlertControllerStyle.alert)			// Constant wich go to show message and title alert
+									  preferredStyle: UIAlertControllerStyle.alert)
 		//----------
-		
 		//- Buttons -
 		alert.addAction(UIAlertAction(title: "Ok",
 									  style: UIAlertActionStyle.default,
@@ -116,11 +135,10 @@ class SignUp: UIViewController, UITextFieldDelegate
 			   message m: String)
 	{
 		//- Alerts -
-		let alert = UIAlertController(title: t,
+		let alert = UIAlertController(title: t,			// Constant wich go to show message and title alert
 									  message: m,
-									  preferredStyle: UIAlertControllerStyle.alert)			// Constant wich go to show message and title alert
+									  preferredStyle: UIAlertControllerStyle.alert)
 		//----------
-		
 		//- Buttons -
 		alert.addAction(UIAlertAction(title: "Yes",
 									  style: UIAlertActionStyle.default,
@@ -138,18 +156,12 @@ class SignUp: UIViewController, UITextFieldDelegate
 		self.present(alert, animated: true, completion: nil)
 	}
 	//-------------------------------------------
-	
 	//=============================================================================
-	
 	//================================== Keyboard =================================
-	
 	//----- Touches begin anything -----
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
-	{
-		self.view.endEditing(true)		/* touches on view end the edition */
-	}
+	{ self.view.endEditing(true) }
 	//----------------------------------
-	
 	//------ Field should return -------	
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool
 	{

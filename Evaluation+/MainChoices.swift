@@ -28,8 +28,8 @@ class MainChoices: UIViewController,
 	@IBOutlet weak var table_view: UITableView!
 	//-------------------------------
 	//---------- Variables ----------
-	var arrayStudents: [String]!; var arrayCourses: [String]!
-	var sortedArrayStudents: [String]!; var sortedArrayCourses: [String]!
+	var arrayStudents, arrayCourses, sortedArrayCourses, sortedArrayStudents: [String]!
+	var arrayButtons: [UIButton]!; var arrayTextFields: [UITextField]!
 	
 	var tagField: Int!
 	//-------------------------------
@@ -39,9 +39,26 @@ class MainChoices: UIViewController,
         super.viewDidLoad()
 		
 		//----
-		//let style = Styles()	/* Class to stylize */
+		let style = Styles()
 		//----
+		arraysToStyle()
+		//----
+		style.styleUISegmentedControl(seg_students_disciplines, 10, 0.8,
+									  UIColor.init(red: 254/255, green: 211/255, blue: 127/255, alpha: 1),
+									  UIColor.init(red: 243/255, green: 203/255, blue: 116/255, alpha: 1).cgColor,
+									  UIColor.init(red: 111/255, green: 113/255, blue: 121/255, alpha: 1).cgColor)
 		
+		style.styleArrayOfUIButtons(arrayButtons, UIFont.init(name: "Champagne & Limousines", size: 17)!,
+									UIColor.init(red: 111/255, green: 113/255, blue: 121/255, alpha: 1),
+									10, 1, UIColor.init(red: 243/255, green: 203/255, blue: 116/255, alpha: 1).cgColor,
+									UIColor.init(red: 254/255, green: 212/255, blue: 128/255, alpha: 1).cgColor, 1)
+		
+		style.styleArrayOfUITextField(arrayTextFields, UIFont.init(name: "Champagne & Limousines", size: 17),
+									  10, 0.7, UIColor.init(red: 209/255, green: 213/255, blue: 218/255, alpha: 1).cgColor,
+									  UIColor.white.cgColor)
+		
+		style.styleUITableView(table_view, 10, 1, UIColor.init(red: 209/255, green: 213/255, blue: 218/255, alpha: 1).cgColor,
+							   UIColor.white.cgColor)
 		//----
 		load_check()	/* Load/check existing files */
 		//----
@@ -49,8 +66,90 @@ class MainChoices: UIViewController,
 		//----
 		seg_students_disciplines.selectedSegmentIndex = 0
 		//----
-
     }
+	//================================ Functions ==================================
+	func arraysToStyle()
+	{
+		arrayButtons = [sign_out, add_student, add_discipline]
+		arrayTextFields = [field_student_name, field_discipline_name]
+	}
+	//------------ Sorted -----------
+	func sorted()
+	{
+		sortedArrayStudents = arrayStudents.sorted()
+		sortedArrayCourses = arrayCourses.sorted()
+		
+		table_view.reloadData()
+	}
+	//------------ Alerts -----------
+	func alert(title t: String,
+			   message m: String,
+			   tag: Int)
+	{
+		//- Alerts -
+		let alert = UIAlertController(title: t,
+									  message: m,
+									  preferredStyle: UIAlertControllerStyle.alert)
+		//- Buttons -
+		if tag == 1
+		{
+			alert.addAction(UIAlertAction(title: "Ok",
+										  style: UIAlertActionStyle.default,
+										  handler: { (action) in
+			alert.dismiss(animated: true, completion: nil)
+			}))
+		}
+		if tag == 2
+		{
+			alert.addAction(UIAlertAction(title: "Yes",
+										  style: UIAlertActionStyle.default,
+										  handler: { (action) in
+			alert.dismiss(animated: true, completion: nil)
+											
+			self.performSegue(withIdentifier: "signOut", sender: nil) 			/* Performe to signOut */
+			}))
+			
+			alert.addAction(UIAlertAction(title: "No",
+										  style: UIAlertActionStyle.default,
+										  handler: { (action) in
+											alert.dismiss(animated: true, completion: nil)
+			}))
+		}
+		self.present(alert, animated: true, completion: nil)
+	}
+	//-------------------------------
+	//--------- Load/Check ----------
+	func load_check()								/* Load or create the first files */
+	{
+		let load = SaveLoadMenager()
+		
+		if load.checkExistingSaves(fileName: "studentsData") == true,
+			load.checkExistingSaves(fileName: "coursesData") == true
+		{
+			arrayStudents = load.loadData(fileName: "studentsData") as! [String]
+			arrayCourses = load.loadData(fileName: "coursesData") as! [String]
+		}
+		else
+		{
+			arrayStudents = [String](); arrayCourses = [String]()
+			load.saveData(theData: arrayStudents as AnyObject, fileName: "studentsData")
+			load.saveData(theData: arrayCourses as AnyObject, fileName: "coursesData")
+		}
+		sorted()
+	}
+	//-------------------------------
+	//---------- Keyboard -----------
+	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)	/* Touche on view to hide keyboard */
+	{
+		self.view.endEditing(true)
+	}
+	
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool				/* Return hide the keyboard */
+	{
+		textField.resignFirstResponder(); return true
+	}
+	//-------------------------------
+	//=============================================================================
 	//================================= Buttons ===================================
 	//---------- Sign Out -----------
 	@IBAction func sign_out(_ sender: UIButton)
@@ -107,84 +206,6 @@ class MainChoices: UIViewController,
 			sorted()
 		}
 	}
-	//=============================================================================
-	//================================ Functions ==================================
-	//------------ Sorted -----------
-    func sorted()
-    {
-        sortedArrayStudents = arrayStudents.sorted()
-        sortedArrayCourses = arrayCourses.sorted()
-        
-        table_view.reloadData()
-    }
-    //------------ Alerts -----------
-	func alert(title t: String,
-			   message m: String,
-			   tag: Int)
-	{
-		//- Alerts -
-		let alert = UIAlertController(title: t,
-									  message: m,
-									  preferredStyle: UIAlertControllerStyle.alert)
-		//- Buttons -
-		if tag == 1
-		{
-			alert.addAction(UIAlertAction(title: "Ok",
-										  style: UIAlertActionStyle.default,
-										  handler: { (action) in
-				alert.dismiss(animated: true, completion: nil)
-			}))
-		}
-		if tag == 2
-		{
-			alert.addAction(UIAlertAction(title: "Yes",
-										  style: UIAlertActionStyle.default,
-										  handler: { (action) in
-				alert.dismiss(animated: true, completion: nil)
-											
-				self.performSegue(withIdentifier: "signOut", sender: nil) 			/* Performe to signOut */
-			}))
-			
-			alert.addAction(UIAlertAction(title: "No",
-										  style: UIAlertActionStyle.default,
-										  handler: { (action) in
-				alert.dismiss(animated: true, completion: nil)
-			}))
-		}
-		self.present(alert, animated: true, completion: nil)
-	}
-	//-------------------------------
-	//--------- Load/Check ----------
-	func load_check()								/* Load or create the first files */
-	{
-		let load = SaveLoadMenager()
-		
-		if load.checkExistingSaves(fileName: "studentsData") == true,
-		   load.checkExistingSaves(fileName: "coursesData") == true
-		{
-			arrayStudents = load.loadData(fileName: "studentsData") as! [String]
-			arrayCourses = load.loadData(fileName: "coursesData") as! [String]
-		}
-		else
-		{
-			arrayStudents = [String](); arrayCourses = [String]()
-			load.saveData(theData: arrayStudents as AnyObject, fileName: "studentsData")
-			load.saveData(theData: arrayCourses as AnyObject, fileName: "coursesData")
-		}
-		sorted()
-	}
-	//-------------------------------
-	//---------- Keyboard -----------
-	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)	/* Touche on view to hide keyboard */
-	{
-		self.view.endEditing(true)
-	}
-	
-	func textFieldShouldReturn(_ textField: UITextField) -> Bool				/* Return hide the keyboard */
-	{
-		textField.resignFirstResponder(); return true
-	}
-	//-------------------------------
 	//=============================================================================
 	//================================ Table View =================================
 	//--------- Cells number --------

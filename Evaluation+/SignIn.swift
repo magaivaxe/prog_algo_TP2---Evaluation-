@@ -32,7 +32,34 @@ class SignIn: UIViewController,
 	override func viewDidLoad()
 	{
 		super.viewDidLoad()
+		//----
+		let style = Styles()
+		//----
+		style.styleUIImageView(imgViewLogo, UIImage(named: "logo.png"), 0,  0, UIColor.white.cgColor)
 		
+		style.styleUIView(viewSignIn, 10, 1,
+						  UIColor.init(red: 209/255, green: 213/255, blue: 218/255, alpha: 1).cgColor,
+						  UIColor.white, 1)
+		
+		style.styleUITextField(fieldUsername, UIFont.init(name: "Champagne & Limousines", size: 17),
+							   "Username", 10, 0.7,
+							   UIColor.init(red: 209/255, green: 213/255, blue: 218/255, alpha: 1).cgColor,
+							   UIColor.white.cgColor)
+		style.styleUITextField(fieldPassword, UIFont.init(name: "Champagne & Limousines", size: 17),
+							   "Username", 10, 0.7,
+							   UIColor.init(red: 209/255, green: 213/255, blue: 218/255, alpha: 1).cgColor,
+							   UIColor.white.cgColor)
+		style.styleUIButtons(buttonSignIn, "Sign In", UIFont.init(name: "Champagne & Limousines", size: 17),
+							 UIColor.init(red: 111/255, green: 113/255, blue: 121/255, alpha: 1),
+							 10, 1, UIColor.init(red: 243/255, green: 203/255, blue: 116/255, alpha: 1).cgColor,
+							 UIColor.init(red: 254/255, green: 212/255, blue: 128/255, alpha: 1).cgColor, 1)
+		style.styleUIView(viewSignUp, 10, 1,
+						  UIColor.init(red: 209/255, green: 213/255, blue: 218/255, alpha: 1).cgColor,
+						  UIColor.white, 1)
+		style.styleUIButtons(buttonCreateAccount, "Create an account",
+							 UIFont.init(name: "Champagne & Limousines", size: 13),
+							 UIColor.init(red: 111/255, green: 113/255, blue: 121/255, alpha: 1), 10, 0,
+							 UIColor.white.cgColor, UIColor.init(white: 1, alpha: 0).cgColor, 1)
 	}
 	//============================== Actions Buttons ==============================
 	@IBAction func signIn(_ sender: UIButton)
