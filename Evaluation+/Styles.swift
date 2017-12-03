@@ -10,179 +10,218 @@ import UIKit
 class Styles
 {
 	//======================= Buttons =======================
-	
 	//- One button -
-	func styleUIButtons(button b: UIButton,
-						font f: UIFont,
-						title t: String,
-	                    radius r: CGFloat,
-	                    borderWidth bw: CGFloat,
-	                    borderColor bc: CGColor,
-	                    bgColor bg: CGColor?)
+	func styleUIButtons(_ button: UIButton,
+						_ title: String?,
+						_ fontName: UIFont?,
+						_ fontColor: UIColor?,
+						_ radius: CGFloat?,
+						_ borderWidthN: CGFloat?,
+						_ borderColorN: CGColor?,
+						_ bgroundColor: CGColor?,
+						_ alphaN: CGFloat?)
 	{
-		b.clipsToBounds = true
-		b.layer.cornerRadius = r
-		b.layer.borderWidth = bw
-		b.layer.borderColor = bc
-		b.layer.backgroundColor = bg
-		b.titleLabel?.font = f
-		b.setTitle(t, for: .normal)
-		b.titleLabel?.adjustsFontSizeToFitWidth = true
+		button.clipsToBounds = true
+		button.layer.cornerRadius = radius!
+		button.layer.borderWidth = borderWidthN!
+		button.layer.borderColor = borderColorN!
+		button.layer.backgroundColor = bgroundColor!
+		button.titleLabel?.font = fontName!
+		button.setTitle(title!, for: .normal)
+		button.titleLabel?.adjustsFontSizeToFitWidth = true
 	}
 	//--------------
-	
 	//- Buttons Arrays -
-	func styleArrayOfUIButtons(arrayOfButtons ab: [UIButton],
-	                           font f: UIFont,
-	                           fontColor fc: UIColor,
-	                           radius r: CGFloat,
-	                           borderWidth bw: CGFloat,
-	                           borderColor bc: CGColor,
-	                           bgColor bg: CGColor?)
+	func styleArrayOfUIButtons(_ buttons: [UIButton],
+	                           _ fontN: UIFont?,
+	                           _ fontColor: UIColor?,
+	                           _ radius: CGFloat?,
+	                           _ borderWidthN: CGFloat?,
+	                           _ borderColorN: CGColor?,
+	                           _ bgroundColor: CGColor?,
+							   _ alphaN: CGFloat?)
 	{
-		for b in ab
+		for b in buttons
 		{
 			b.clipsToBounds = true
-			b.layer.cornerRadius = r
-			b.layer.borderWidth = bw
-			b.layer.borderColor = bc
-			b.layer.backgroundColor = bg
-			b.titleLabel?.font = f
-			b.titleLabel?.textColor = fc
+			b.layer.cornerRadius = radius!
+			b.layer.borderWidth = borderWidthN!
+			b.layer.borderColor = borderColorN!
+			b.layer.backgroundColor = bgroundColor!
+			b.titleLabel?.font = fontN!
+			b.titleLabel?.textColor = fontColor!
+			b.alpha = alphaN!
 		}
 	}
 	//------------------
-	
-	//- Color buttons arrays -
-	func styleColorsOfButtons(arrayOfButtons ab: [UIButton],
-	                          colors c: CGColor?)
-	{
-		for b in ab
-		{
-			b.layer.backgroundColor = c
-		}
-	}
-	//------------------------
-	
-	//- Alpha buttons arrays -
-	func styleAlphaOfButtons(arrayOfButtons ab: [UIButton],
-	                         alpha a: CGFloat)
-	{
-		for b in ab
-		{
-			b.alpha = a
-		}
-	}
-	//------------------------
-	
 	//=======================================================
-	
 	//--- The others ---
-	func styleUISegmentedControl(segmentedControl sc: UISegmentedControl,
-	                             radius r: CGFloat,
-	                             borderWidth bw: CGFloat,
-	                             tintColor tc: UIColor,
-	                             borderColor bc: CGColor,
-	                             bgColor bg: CGColor?)
+	func styleUISegmentedControl(_ sControl: UISegmentedControl,
+	                             _ radius: CGFloat?,
+	                             _ borderWidthN: CGFloat?,
+	                             _ tintColorN: UIColor?,
+	                             _ borderColorN: CGColor?,
+	                             _ bgroundColor: CGColor?)
 	{
-		sc.clipsToBounds = true
-		sc.layer.cornerRadius = r
-		sc.layer.borderWidth = bw
-		sc.layer.borderColor = bc
-		sc.tintColor = tc
-		sc.layer.backgroundColor = bg
+		sControl.clipsToBounds = true
+		sControl.layer.cornerRadius = radius!
+		sControl.layer.borderWidth = borderWidthN!
+		sControl.layer.borderColor = borderColorN!
+		sControl.tintColor = tintColorN!
+		sControl.layer.backgroundColor = bgroundColor!
 	}
 	
-	func styleUITextField(textField tv: UITextField,
-	                      font f: UIFont,
-	                      radius r: CGFloat,
-	                      borderWidth bw: CGFloat,
-	                      borderColor bc: CGColor,
-	                      bgColor bg: CGColor?)
+	func styleUITextField(_ textField: UITextField,
+	                      _ fontN: UIFont?,
+						  _ placeH: String?,
+	                      _ radius: CGFloat?,
+	                      _ borderWidthN: CGFloat?,
+	                      _ borderColorN: CGColor?,
+	                      _ bgroundColor: CGColor?)
 	{
-		tv.clipsToBounds = true
-		tv.font = f
-		tv.layer.cornerRadius = r
-		tv.layer.borderWidth = bw
-		tv.layer.borderColor = bc
-		tv.layer.backgroundColor = bg
+		textField.clipsToBounds = true
+		textField.font = fontN!
+		textField.placeholder = placeH!
+		textField.layer.cornerRadius = radius!
+		textField.layer.borderWidth = borderWidthN!
+		textField.layer.borderColor = borderColorN!
+		textField.layer.backgroundColor = bgroundColor!
 	}
 	
-	func styleUILabel(label l: UILabel,
-					  font f: UIFont,
-					  textAlignment ta: NSTextAlignment,
-					  radius r: CGFloat,
-					  borderWidth bw: CGFloat,
-					  borderColor bc: CGColor,
-					  bgColor bg: CGColor?)
+	func styleArrayOfUITextField(_ textField:[UITextField],
+								 _ fontN: UIFont?,
+								 _ radius: CGFloat?,
+								 _ borderWidthN: CGFloat?,
+								 _ borderColorN: CGColor?,
+								 _ bgroundColor: CGColor?)
 	{
-		l.clipsToBounds = true
-		l.font = f
-		l.textAlignment = ta
-		l.layer.cornerRadius = r
-		l.layer.borderWidth = bw
-		l.layer.borderColor = bc
-		l.layer.backgroundColor = bg
+		for tf in textField
+		{
+			tf.clipsToBounds = true
+			tf.font = fontN!
+			tf.layer.cornerRadius = radius!
+			tf.layer.borderWidth = borderWidthN!
+			tf.layer.borderColor = borderColorN!
+			tf.layer.backgroundColor = bgroundColor!
+		}
+	}
+	
+	func styleUILabel(_ label: UILabel,
+					  _ fontN: UIFont?,
+					  _ textAlignmentT: NSTextAlignment?,
+					  _ textN: String?,
+					  _ radius: CGFloat?,
+					  _ borderWidthN: CGFloat?,
+					  _ borderColorN: CGColor?,
+					  _ bgroundColor: CGColor?)
+	{
+		label.clipsToBounds = true
+		label.font = fontN!
+		label.textAlignment = textAlignmentT!
+		label.text = textN!
+		label.layer.cornerRadius = radius!
+		label.layer.borderWidth = borderWidthN!
+		label.layer.borderColor = borderColorN!
+		label.layer.backgroundColor = bgroundColor!
+	}
+	
+	func styleArrayOfUILabel(_ label: [UILabel],
+							 _ fontN: UIFont?,
+							 _ textAlignmentT: NSTextAlignment?,
+							 _ radius: CGFloat?,
+							 _ borderWidthN: CGFloat?,
+							 _ borderColorN: CGColor?,
+							 _ textColor: UIColor?,
+							 _ bgroundColor: CGColor?)
+	{
+		for l in label
+		{
+			l.clipsToBounds = true
+			l.font = fontN!
+			l.textAlignment = textAlignmentT!
+			l.layer.cornerRadius = radius!
+			l.layer.borderWidth = borderWidthN!
+			l.textColor = textColor!
+			l.layer.borderColor = borderColorN!
+			l.layer.backgroundColor = bgroundColor!
+		}
 	}
 	//------------------
-	
 	//====================== The views ======================
-	func styleUITextViews(textView tv: UITextView,
-	                      radius r: CGFloat,
-						  font f: UIFont,
-	                      textColor tc: UIColor,
-						  textAlignment ta: NSTextAlignment,
-	                      borderWidth bw: CGFloat,
-	                      borderColor bc: CGColor,
-	                      bgColor bg: CGColor?)
+	func styleUITextViews(_ textView: UITextView,
+	                      _ radius: CGFloat?,
+						  _ fontN: UIFont?,
+						  _ textN: String?,
+	                      _ textColor: UIColor?,
+						  _ textAlignmentT: NSTextAlignment?,
+						  _ borderWidthN: CGFloat?,
+						  _ borderColorN: CGColor?,
+						  _ bgroundColor: CGColor?)
+		
 	{
-		tv.clipsToBounds = true
-		tv.font = f
-		tv.textColor = tc
-		tv.textAlignment = ta
-		tv.layer.cornerRadius = r
-		tv.layer.borderWidth = bw
-		tv.layer.borderColor = bc
-		tv.layer.backgroundColor = bg
+		textView.clipsToBounds = true
+		textView.font = fontN!
+		textView.textColor = textColor!
+		textView.textAlignment = textAlignmentT!
+		textView.layer.cornerRadius = radius!
+		textView.layer.borderWidth = borderWidthN!
+		textView.layer.borderColor = borderColorN!
+		textView.layer.backgroundColor = bgroundColor!
 	}
 	
-	func styleUITableView(tableView tv: UITableView,
-	                      radius r: CGFloat,
-	                      borderWidth bw: CGFloat,
-	                      borderColor bc: CGColor,
-	                      bgColor bg: CGColor?)
+	func styleUITableView(_ tableView: UITableView,
+	                      _ radius: CGFloat?,
+	                      _ borderWidthN: CGFloat?,
+						  _ borderColorN: CGColor?,
+						  _ bgroundColor: CGColor?)
 	{
-		tv.clipsToBounds = true
-		tv.layer.cornerRadius = r
-		tv.layer.borderWidth = bw
-		tv.layer.borderColor = bc
-		tv.layer.backgroundColor = bg
+		tableView.clipsToBounds = true
+		tableView.layer.cornerRadius = radius!
+		tableView.layer.borderWidth = borderWidthN!
+		tableView.layer.borderColor = borderColorN!
+		tableView.layer.backgroundColor = bgroundColor!
 	}
 	
-	
-    
-    func styleUIScrollView(scrollView sv: UIScrollView,
-                           radius r: CGFloat,
-                           borderWidth bw: CGFloat,
-                           borderColor bc: CGColor,
-                           bgColor bg: CGColor?)
+    func styleUIScrollView(_ scrollView: UIScrollView,
+                           _ radius: CGFloat?,
+						   _ borderWidthN: CGFloat?,
+						   _ borderColorN: CGColor?,
+						   _ bgroundColor: CGColor?)
     {
-        sv.clipsToBounds = true
-        sv.layer.cornerRadius = r
-        sv.layer.borderWidth = bw
-        sv.layer.borderColor = bc
-		sv.layer.backgroundColor = bg
+        scrollView.clipsToBounds = true
+        scrollView.layer.cornerRadius = radius!
+        scrollView.layer.borderWidth = borderWidthN!
+        scrollView.layer.borderColor = borderColorN!
+		scrollView.layer.backgroundColor = bgroundColor!
     }
 	
-	func styleUIImageView(imageView iv: UIImageView,
-	                      radius r: CGFloat,
-	                      borderWidth bw: CGFloat,
-	                      borderColor bc: CGColor)
+	func styleUIImageView(_ imageView: UIImageView,
+	                      _ radius: CGFloat?,
+						  _ imageI: UIImage?,
+						  _ borderWidthN: CGFloat?,
+						  _ borderColorN: CGColor?)
 	{
-		iv.clipsToBounds = true
-		iv.layer.cornerRadius = r
-		iv.layer.borderWidth = bw
-		iv.layer.borderColor = bc
+		imageView.clipsToBounds = true
+		imageView.image = imageI!					/* UIImage(named: "name")*/
+		imageView.layer.cornerRadius = radius!
+		imageView.layer.borderWidth = borderWidthN!
+		imageView.layer.borderColor = borderColorN!
+	}
+	
+	func styleArrayOfImageViews(_ imageView: [UIImageView],
+								_ imageNames: [String]?,
+								_ radius: CGFloat?,
+								_ borderWidthN: CGFloat?,
+								_ borderColorN: CGColor?)
+	{
+		var i = 0
+		for iv in imageView
+		{
+			iv.image = UIImage(named: imageNames![i]); i = i + 1
+			iv.layer.cornerRadius = radius!
+			iv.layer.borderWidth = borderWidthN!
+			iv.layer.borderColor = borderColorN!
+		}
 	}
 	//=======================================================
 }
