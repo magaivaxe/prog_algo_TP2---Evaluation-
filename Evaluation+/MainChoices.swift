@@ -32,6 +32,7 @@ class MainChoices: UIViewController,
 	var arrayButtons: [UIButton]!; var arrayTextFields: [UITextField]!
 	
 	var tagField: Int!
+	var cell: UITableViewCell!
 	//-------------------------------
 
     override func viewDidLoad()
@@ -48,7 +49,7 @@ class MainChoices: UIViewController,
 									  UIColor.init(red: 243/255, green: 203/255, blue: 116/255, alpha: 1).cgColor,
 									  UIColor.init(red: 111/255, green: 113/255, blue: 121/255, alpha: 1).cgColor)
 		
-		style.styleArrayOfUIButtons(arrayButtons, UIFont.init(name: "Champagne & Limousines", size: 17)!,
+		style.styleArrayOfUIButtons(arrayButtons, UIFont.init(name: "Champagne & Limousines", size: 17),
 									UIColor.init(red: 111/255, green: 113/255, blue: 121/255, alpha: 1),
 									10, 1, UIColor.init(red: 243/255, green: 203/255, blue: 116/255, alpha: 1).cgColor,
 									UIColor.init(red: 254/255, green: 212/255, blue: 128/255, alpha: 1).cgColor, 1)
@@ -57,8 +58,11 @@ class MainChoices: UIViewController,
 									  10, 0.7, UIColor.init(red: 209/255, green: 213/255, blue: 218/255, alpha: 1).cgColor,
 									  UIColor.white.cgColor)
 		
-		style.styleUITableView(table_view, 10, 1, UIColor.init(red: 209/255, green: 213/255, blue: 218/255, alpha: 1).cgColor,
+		style.styleUITableView(table_view, 10, 1,
+							   UIColor.init(red: 111/255, green: 113/255, blue: 121/255, alpha: 1),
+							   UIColor.init(red: 209/255, green: 213/255, blue: 218/255, alpha: 1).cgColor,
 							   UIColor.white.cgColor)
+		
 		//----
 		load_check()	/* Load/check existing files */
 		//----
@@ -227,8 +231,12 @@ class MainChoices: UIViewController,
 	func tableView(_ tableView: UITableView,
 				   cellForRowAt indexPath: IndexPath) -> UITableViewCell	/* Rows contents */
 	{
-		let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.default,
+		cell = UITableViewCell(style: UITableViewCellStyle.default,
 													reuseIdentifier: nil)
+		
+		cell.textLabel?.font = UIFont.init(name: "Champagne & Limousines", size: 17)
+		cell.textLabel?.textAlignment = NSTextAlignment.center
+		cell.textLabel?.textColor = UIColor.black
 		
 		if seg_students_disciplines.selectedSegmentIndex == 0		/* Students */
 		{

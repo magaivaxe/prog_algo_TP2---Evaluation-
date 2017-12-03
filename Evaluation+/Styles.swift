@@ -34,28 +34,28 @@ class Styles
 	//- Buttons Arrays -
 	func styleArrayOfUIButtons(_ buttons: [UIButton],
 	                           _ fontN: UIFont?,
-	                           _ fontColor: UIColor?,
+	                           _ fontColor: UIColor,
 	                           _ radius: CGFloat,
 	                           _ borderWidthN: CGFloat,
-	                           _ borderColorN: CGColor?,
+	                           _ borderColorN: CGColor,
 	                           _ bgroundColor: CGColor?,
 							   _ alphaN: CGFloat)
 	{
 		for b in buttons
 		{
 			b.clipsToBounds = true
+			b.titleLabel?.font = fontN!
+			b.titleLabel?.textColor = fontColor
 			b.layer.cornerRadius = radius
 			b.layer.borderWidth = borderWidthN
-			b.layer.borderColor = borderColorN!
+			b.layer.borderColor = borderColorN
 			b.layer.backgroundColor = bgroundColor!
-			b.titleLabel?.font = fontN!
-			b.titleLabel?.textColor = fontColor!
 			b.alpha = alphaN
 		}
 	}
 	//------------------
 	//=======================================================
-	//--- The others ---
+	//======= Segmented Control, Switch Grade, Slider =======
 	func styleUISegmentedControl(_ sControl: UISegmentedControl,
 	                             _ radius: CGFloat?,
 	                             _ borderWidthN: CGFloat?,
@@ -70,7 +70,61 @@ class Styles
 		sControl.tintColor = tintColorN!
 		sControl.layer.backgroundColor = bgroundColor!
 	}
-	
+	//--------
+	func styleSwitchGrade(_ sGrade: UISwitch,
+						  _ onColor: UIColor,
+						  _ offColor: UIColor,
+						  _ thumbColor: UIColor,
+						  _ borderWidthN: CGFloat,
+						  _ borderColorN: CGColor)
+	{
+		sGrade.onTintColor = onColor
+		sGrade.tintColor = offColor
+		sGrade.thumbTintColor = thumbColor
+		sGrade.layer.borderWidth = borderWidthN
+		sGrade.layer.borderColor = borderColorN
+	}
+	//--------
+	func styleArraySwitchGrade(_ arraySGrade: [UISwitch],
+							   _ onColor: UIColor,
+							   _ offColor: UIColor,
+							   _ thumbColor: UIColor,
+							   _ borderWidthN: CGFloat,
+							   _ borderColorN: CGColor)
+	{
+		for sg in arraySGrade
+		{
+			sg.onTintColor = onColor
+			sg.tintColor = offColor
+			sg.thumbTintColor = thumbColor
+			sg.layer.borderWidth = borderWidthN
+			sg.layer.borderColor = borderColorN
+		}
+	}
+	//--------
+	func styleSlider(_ slider: UISlider,
+					 _ thumbColor: UIColor,
+					 _ maxColor: UIColor,
+					 _ minColor: UIColor)
+	{
+		slider.thumbTintColor = thumbColor
+		slider.maximumTrackTintColor = maxColor
+		slider.minimumTrackTintColor = minColor
+	}
+	//--------
+	func styleArraySliders(_ arraySlider: [UISlider],
+						   _ thumbColor: UIColor,
+						   _ maxColor: UIColor,
+						   _ minColor: UIColor)
+	{
+		for slider in arraySlider
+		{
+			slider.thumbTintColor = thumbColor
+			slider.maximumTrackTintColor = maxColor
+			slider.minimumTrackTintColor = minColor
+		}
+	}
+	//=======================================================
 	func styleUITextField(_ textField: UITextField,
 	                      _ fontN: UIFont?,
 						  _ placeH: String?,
@@ -170,15 +224,17 @@ class Styles
 	}
 	
 	func styleUITableView(_ tableView: UITableView,
-	                      _ radius: CGFloat?,
-	                      _ borderWidthN: CGFloat?,
-						  _ borderColorN: CGColor?,
+						  _ radius: CGFloat,
+						  _ borderWidthN: CGFloat,
+						  _ separator: UIColor,
+						  _ borderColorN: CGColor,
 						  _ bgroundColor: CGColor?)
 	{
 		tableView.clipsToBounds = true
-		tableView.layer.cornerRadius = radius!
-		tableView.layer.borderWidth = borderWidthN!
-		tableView.layer.borderColor = borderColorN!
+		tableView.separatorColor = separator
+		tableView.layer.cornerRadius = radius
+		tableView.layer.borderWidth = borderWidthN
+		tableView.layer.borderColor = borderColorN
 		tableView.layer.backgroundColor = bgroundColor!
 	}
 	

@@ -59,6 +59,7 @@ class StudentsGrades: UIViewController,
 	typealias course = String
 	typealias grades = [Double]
 	
+	var cell: UITableViewCell!
 	var studentName: String!
 	var arrayCourses: [String]!
 	var currentCourse: String?
@@ -84,10 +85,36 @@ class StudentsGrades: UIViewController,
 		//----
 		let style = Styles()
 		//----
-		load()
-		//----
 		arraysToStyle()
 		//----
+		style.styleArrayOfUIButtons(arrayButtons, UIFont.init(name: "Champagne & Limousines", size: 17),
+									UIColor.init(red: 111/255, green: 113/255, blue: 121/255, alpha: 1),
+									10, 1, UIColor.init(red: 243/255, green: 203/255, blue: 116/255, alpha: 1).cgColor,
+									UIColor.init(red: 254/255, green: 212/255, blue: 128/255, alpha: 1).cgColor, 1)
+		style.styleArrayOfUILabel(arrayLabels, UIFont.init(name: "Champagne & Limousines", size: 17),
+								  NSTextAlignment.center, 10, 1,
+								  UIColor.init(red: 209/255, green: 213/255, blue: 218/255, alpha: 1).cgColor,
+								  UIColor.black, UIColor.init(red: 222/255, green: 222/255, blue: 222/255, alpha: 1).cgColor)
+		style.styleArrayOfUITextField(arrayFields, UIFont.init(name: "Champagne & Limousines", size: 17),
+									  10, 0.7, UIColor.init(red: 209/255, green: 213/255, blue: 218/255, alpha: 1).cgColor,
+									  UIColor.white.cgColor)
+		style.styleArraySliders(arraySliders, UIColor.init(red: 111/255, green: 113/255, blue: 121/255, alpha: 1),
+								UIColor.init(red: 209/255, green: 213/255, blue: 218/255, alpha: 1),
+								UIColor.init(red: 254/255, green: 211/255, blue: 127/255, alpha: 1))
+		style.styleUISegmentedControl(seg_grades, 10, 0.8,
+									  UIColor.init(red: 254/255, green: 211/255, blue: 127/255, alpha: 1),
+									  UIColor.init(red: 243/255, green: 203/255, blue: 116/255, alpha: 1).cgColor,
+									  UIColor.init(red: 111/255, green: 113/255, blue: 121/255, alpha: 1).cgColor)
+		
+		style.styleUITableView(tableview_disciplines, 10, 1,
+							   UIColor.init(red: 111/255, green: 113/255, blue: 121/255, alpha: 1),
+							   UIColor.init(red: 209/255, green: 213/255, blue: 218/255, alpha: 1).cgColor,
+							   UIColor.white.cgColor)
+		//----
+		load()
+		//----
+		
+		
 		
 		//----
 		label_name.text = studentName						/* Show current name */
@@ -470,8 +497,11 @@ class StudentsGrades: UIViewController,
     func tableView(_ tableView: UITableView,
 				   cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
-		let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.default,
-													reuseIdentifier: nil)
+		cell = UITableViewCell(style: UITableViewCellStyle.default,
+							   reuseIdentifier: nil)
+		cell.textLabel?.font = UIFont.init(name: "Champagne & Limousines", size: 17)
+		cell.textLabel?.textAlignment = NSTextAlignment.center
+		cell.textLabel?.textColor = UIColor.black
 		
 		cell.textLabel?.text = arrayCourses[indexPath.row]
 		
