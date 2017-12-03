@@ -165,8 +165,23 @@ class SignUp: UIViewController, UITextFieldDelegate
 	//------ Field should return -------	
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool
 	{
-		textField.resignFirstResponder()		/* Key return hide the keyboard on text fields */
-		return (true)
+		if textField == fieldConcoIdentification
+		{
+			fieldUsername.becomeFirstResponder()		/* Key return pass to next field */
+		}
+		else if textField == fieldUsername
+		{
+			fieldEmailAddress.becomeFirstResponder()	/* Key return pass to next field */
+		}
+		else if textField == fieldEmailAddress
+		{
+			fieldPassword.becomeFirstResponder()		/* Key return pass to next field */
+		}
+		else
+		{
+			fieldPassword.resignFirstResponder()		/* Key return hide the keyboard on text fields */
+		}
+		return true
 	}
 	//----------------------------------
 	

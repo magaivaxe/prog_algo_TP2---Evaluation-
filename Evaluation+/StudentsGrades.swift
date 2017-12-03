@@ -110,16 +110,24 @@ class StudentsGrades: UIViewController,
 							   UIColor.init(red: 111/255, green: 113/255, blue: 121/255, alpha: 1),
 							   UIColor.init(red: 209/255, green: 213/255, blue: 218/255, alpha: 1).cgColor,
 							   UIColor.white.cgColor)
+		style.styleSwitchGrade(switch_grade, UIColor.init(red: 254/255, green: 211/255, blue: 127/255, alpha: 1),
+							   UIColor.init(red: 222/255, green: 222/255, blue: 222/255, alpha: 1),
+							   UIColor.init(red: 111/255, green: 113/255, blue: 121/255, alpha: 1),
+							   0, UIColor.black.cgColor)
 		//----
-		load()
+		loadData()
 		//----
+		label_name.text = studentName								/* Show current name */
 		
+		grade30_1 = 0.0; grade30_2 = 0.0; grade30_3 = 0.0			/* Initial grades values */
+		grade100_1 = 0.0; grade100_2 = 0.0; grade100_3 = 0.0
 		
+		criteria1 = 0.0; criteria2 = 0.0; criteria3 = 0.0			/* Initial criteria values */
+		criteria4 = 0.0; criteria5 = 0.0
 		
-		//----
-		label_name.text = studentName						/* Show current name */
-		grade30_1 = 0; grade30_2 = 0; grade30_3 = 0			/* Initial grades values */
-		grade100_1 = 0; grade100_2 = 0; grade100_3 = 0
+		label_grade1.text = "0.0"; label_grade2.text = "0.0";		/* Initial label values */
+		label_grade3.text = "0.0"; label_grade4.text = "0.0";
+		label_grade5.text = "0.0";
 		//----
     }
 	//=============================================================================
@@ -189,7 +197,7 @@ class StudentsGrades: UIViewController,
 	}
 	//-------------------------------
 	//--------- Data loads ----------
-	func load()
+	func loadData()
 	{
 		let load = SaveLoadMenager()
 		
@@ -387,15 +395,15 @@ class StudentsGrades: UIViewController,
 	//----- Save / go to class ------
     @IBAction func go_classrooms(_ sender: UIButton)
     {
-		if (label_grade1.text == "" || label_grade2.text == "" ||
-		    label_grade3.text == "" || label_grade4.text == "" ||
-		    label_grade1.text == "")
-		{
-			alert(title: "No criterias!",
-				  message: "Please set the all criterias for total grade calculus.",
-				  tag: 2)
-			return
-		}
+//		if (label_grade1.text == "" || label_grade2.text == "" ||
+//		    label_grade3.text == "" || label_grade4.text == "" ||
+//		    label_grade1.text == "")
+//		{
+//			alert(title: "No criterias!",
+//				  message: "Please set the all criterias for total grade calculus.",
+//				  tag: 2)
+//			return
+//		}
 		
         let calculate = Calculate()
         let save = SaveLoadMenager()
@@ -531,7 +539,19 @@ class StudentsGrades: UIViewController,
     { self.view.endEditing(true) }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool
-    { textField.resignFirstResponder(); return true }
+    {
+		if textField == field_weight1
+		{ field_weight2.becomeFirstResponder()}
+		else if textField == field_weight2
+		{ field_weight3.becomeFirstResponder()}
+		else if textField == field_weight3
+		{ field_weight4.becomeFirstResponder()}
+		else if textField == field_weight4
+		{ field_weight5.becomeFirstResponder()}
+		else
+		{ field_weight5.resignFirstResponder()}
+		return true
+	}
     //=============================================================================
 }
 

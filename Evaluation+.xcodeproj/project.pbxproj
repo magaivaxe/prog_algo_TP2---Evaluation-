@@ -164,11 +164,11 @@
 		BF91FB5E1FC56390009332AC /* controllers */ = {
 			isa = PBXGroup;
 			children = (
-				9B6A40811FCC7C26004AF7AE /* TableViewDatas.swift */,
 				BF91FB421FC55DD8009332AC /* SignIn.swift */,
 				BF91FB521FC55EAE009332AC /* SignUp.swift */,
 				BF91FB561FC56086009332AC /* MainChoices.swift */,
 				9B6A40851FCCBAC3004AF7AE /* StudentsGrades.swift */,
+				9B6A40811FCC7C26004AF7AE /* TableViewDatas.swift */,
 			);
 			name = controllers;
 			sourceTree = "<group>";

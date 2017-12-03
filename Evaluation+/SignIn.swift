@@ -46,7 +46,7 @@ class SignIn: UIViewController,
 							   UIColor.init(red: 209/255, green: 213/255, blue: 218/255, alpha: 1).cgColor,
 							   UIColor.white.cgColor)
 		style.styleUITextField(fieldPassword, UIFont.init(name: "Champagne & Limousines", size: 17),
-							   "Username", 10, 0.7,
+							   "Password", 10, 0.7,
 							   UIColor.init(red: 209/255, green: 213/255, blue: 218/255, alpha: 1).cgColor,
 							   UIColor.white.cgColor)
 		style.styleUIButtons(buttonSignIn, "Sign In", UIFont.init(name: "Champagne & Limousines", size: 17),
@@ -141,7 +141,13 @@ class SignIn: UIViewController,
 	//----------------------------------
 	//------ Field should return -------
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool
-	{ textField.resignFirstResponder(); return true }
+	{
+		if textField == fieldUsername
+		{fieldPassword.becomeFirstResponder()}
+		else
+		{fieldPassword.resignFirstResponder()}
+		return true
+	}
 	//----------------------------------
 	//=============================================================================
 }

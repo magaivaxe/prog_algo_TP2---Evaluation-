@@ -19,9 +19,9 @@ class TableViewDatas: UIViewController,
 	@IBOutlet weak var table_view: UITableView!
 	
 
+	
 	@IBOutlet weak var return_button: UIButton!
 	//- Static -
-
 	@IBOutlet weak var label_gradeOn30: UILabel!
 	@IBOutlet weak var label_gradeOn100: UILabel!
 	//-------------------------------
@@ -32,6 +32,8 @@ class TableViewDatas: UIViewController,
 	typealias grade = Double
 	typealias grades = [Double]
 	
+	var cell: UITableViewCell!
+	var arrayOfLabels: [UILabel]!
 	var dictStudentGrades30 = [String:[String:[Double]]]()
 	var dictStudentGrades100 = [String:[String:[Double]]]()
 	
@@ -42,12 +44,25 @@ class TableViewDatas: UIViewController,
     override func viewDidLoad()
 	{
         super.viewDidLoad()
-		
+		//----
+		let style = Styles()
 		//----
 		loads()
 		//----
 		setTuple()
 		//----
+		style.styleUITableView(table_view, 10, 1,
+							   UIColor.init(red: 111/255, green: 113/255, blue: 121/255, alpha: 1),
+							   UIColor.init(red: 209/255, green: 213/255, blue: 218/255, alpha: 1).cgColor,
+							   UIColor.white.cgColor)
+		style.styleSwitchGrade(switch_gradeOn, UIColor.init(red: 254/255, green: 211/255, blue: 127/255, alpha: 1),
+							   UIColor.init(red: 222/255, green: 222/255, blue: 222/255, alpha: 1),
+							   UIColor.init(red: 111/255, green: 113/255, blue: 121/255, alpha: 1),
+							   0, UIColor.black.cgColor)
+		style.styleUIButtons(return_button, "Back", UIFont.init(name: "Champagne & Limousines", size: 17),
+							 UIColor.init(red: 111/255, green: 113/255, blue: 121/255, alpha: 1),
+							 10, 1, UIColor.init(red: 243/255, green: 203/255, blue: 116/255, alpha: 1).cgColor,
+							 UIColor.init(red: 254/255, green: 212/255, blue: 128/255, alpha: 1).cgColor, 1)
     }
 	//=============================================================================
 	//======================== Switch, Segmented and Sliders ======================
@@ -59,7 +74,11 @@ class TableViewDatas: UIViewController,
 	
 	//=============================================================================
 	//================================ Functions ==================================
-
+	func arrayToStyle()
+	{
+//		arrayOfLabels = [label_cell_name, label_cell_course, label_cell_grade1,
+//						 label_cell_grade2, label_cell_grade3, label_cell_average]
+	}
 	//----------- Arrays ------------		/* Function to set the arrays */
 	func setTuple()
 	{
@@ -109,6 +128,11 @@ class TableViewDatas: UIViewController,
 			
 			if let grade3 = cell.viewWithTag(303) as! UILabel!
 			{ grade3.text = String(tupleStudentGrades30[indexPath.row].arr[indexPath.row].num3) }
+			
+			if let average = cell.viewWithTag(304) as! UILabel!
+			{ average.text = String((tupleStudentGrades30[indexPath.row].arr[indexPath.row].num1 +
+				tupleStudentGrades30[indexPath.row].arr[indexPath.row].num2 +
+				tupleStudentGrades30[indexPath.row].arr[indexPath.row].num3) / 3)}
 		}
 		else
 		{
@@ -123,6 +147,11 @@ class TableViewDatas: UIViewController,
 			
 			if let grade2 = cell.viewWithTag(302) as! UILabel!
 			{ grade2.text = String(tupleStudentGrades100[indexPath.row].arr[indexPath.row].num2) }
+			
+			if let average = cell.viewWithTag(304) as! UILabel!
+			{ average.text = String((((tupleStudentGrades100[indexPath.row].arr[indexPath.row].num1 +
+				tupleStudentGrades100[indexPath.row].arr[indexPath.row].num2 +
+				tupleStudentGrades100[indexPath.row].arr[indexPath.row].num3) / 3) * 10).rounded() / 10)}
 		}
 		return cell
 	}
