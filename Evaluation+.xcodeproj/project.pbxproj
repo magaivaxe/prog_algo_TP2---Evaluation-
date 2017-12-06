@@ -19,7 +19,6 @@
 		BF91FB431FC55DD8009332AC /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF91FB421FC55DD8009332AC /* SignIn.swift */; };
 		BF91FB461FC55DD8009332AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF91FB441FC55DD8009332AC /* Main.storyboard */; };
 		BF91FB481FC55DD8009332AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF91FB471FC55DD8009332AC /* Assets.xcassets */; };
-		BF91FB4B1FC55DD8009332AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF91FB491FC55DD8009332AC /* LaunchScreen.storyboard */; };
 		BF91FB531FC55EAE009332AC /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF91FB521FC55EAE009332AC /* SignUp.swift */; };
 		BF91FB571FC56086009332AC /* MainChoices.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF91FB561FC56086009332AC /* MainChoices.swift */; };
 		BF91FB5D1FC5637F009332AC /* SaveLoadMenager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF91FB5C1FC5637F009332AC /* SaveLoadMenager.swift */; };
@@ -55,6 +54,7 @@
 		BF96EA421FD3CD72000CAE15 /* Icon-167.png in Resources */ = {isa = PBXBuildFile; fileRef = BF96EA241FD3CD72000CAE15 /* Icon-167.png */; };
 		BF96EA431FD3CD72000CAE15 /* Icon-40.png in Resources */ = {isa = PBXBuildFile; fileRef = BF96EA251FD3CD72000CAE15 /* Icon-40.png */; };
 		BF96EA441FD3CD72000CAE15 /* Icon-256.png in Resources */ = {isa = PBXBuildFile; fileRef = BF96EA261FD3CD72000CAE15 /* Icon-256.png */; };
+		BFEFCD581FD7B8C700937522 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFEFCD571FD7B8C700937522 /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,7 +71,6 @@
 		BF91FB421FC55DD8009332AC /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
 		BF91FB451FC55DD8009332AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BF91FB471FC55DD8009332AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		BF91FB4A1FC55DD8009332AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BF91FB4C1FC55DD8009332AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BF91FB521FC55EAE009332AC /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
 		BF91FB561FC56086009332AC /* MainChoices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainChoices.swift; sourceTree = "<group>"; };
@@ -108,6 +107,7 @@
 		BF96EA241FD3CD72000CAE15 /* Icon-167.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-167.png"; path = "icons/Icon-167.png"; sourceTree = "<group>"; };
 		BF96EA251FD3CD72000CAE15 /* Icon-40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-40.png"; path = "icons/Icon-40.png"; sourceTree = "<group>"; };
 		BF96EA261FD3CD72000CAE15 /* Icon-256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-256.png"; path = "icons/Icon-256.png"; sourceTree = "<group>"; };
+		BFEFCD571FD7B8C700937522 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +135,7 @@
 		BF91FB341FC55DD8009332AC = {
 			isa = PBXGroup;
 			children = (
+				BFEFCD571FD7B8C700937522 /* Default-568h@2x.png */,
 				BF91FB3F1FC55DD8009332AC /* Evaluation+ */,
 				BF91FB3E1FC55DD8009332AC /* Products */,
 			);
@@ -196,7 +197,6 @@
 			isa = PBXGroup;
 			children = (
 				BF91FB401FC55DD8009332AC /* AppDelegate.swift */,
-				BF91FB491FC55DD8009332AC /* LaunchScreen.storyboard */,
 				BF91FB471FC55DD8009332AC /* Assets.xcassets */,
 				BF91FB4C1FC55DD8009332AC /* Info.plist */,
 			);
@@ -328,7 +328,6 @@
 				BF96EA421FD3CD72000CAE15 /* Icon-167.png in Resources */,
 				BF96EA2A1FD3CD72000CAE15 /* Icon-512.png in Resources */,
 				9B06C8FE1FD0B588005C0036 /* Champagne & Limousines Italic.ttf in Resources */,
-				BF91FB4B1FC55DD8009332AC /* LaunchScreen.storyboard in Resources */,
 				BF96EA381FD3CD72000CAE15 /* Icon-1024.png in Resources */,
 				BF96EA301FD3CD72000CAE15 /* Icon-196.png in Resources */,
 				BF96EA3A1FD3CD72000CAE15 /* Icon-114.png in Resources */,
@@ -349,6 +348,7 @@
 				9B06C8FC1FD0B588005C0036 /* Champagne & Limousines Bold Italic.ttf in Resources */,
 				BF96EA441FD3CD72000CAE15 /* Icon-256.png in Resources */,
 				BF96EA311FD3CD72000CAE15 /* Icon-57.png in Resources */,
+				BFEFCD581FD7B8C700937522 /* Default-568h@2x.png in Resources */,
 				BF96EA321FD3CD72000CAE15 /* Icon-76.png in Resources */,
 				BF96EA271FD3CD72000CAE15 /* Icon-16.png in Resources */,
 				BF96EA3F1FD3CD72000CAE15 /* Icon-58.png in Resources */,
@@ -387,14 +387,6 @@
 				BF91FB451FC55DD8009332AC /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		BF91FB491FC55DD8009332AC /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BF91FB4A1FC55DD8009332AC /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

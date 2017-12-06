@@ -70,22 +70,11 @@ class SignUp: UIViewController, UITextFieldDelegate
 		emailAddress = fieldEmailAddress.text!
 		password = fieldPassword.text!
 		//- Condotions to fail -
-		if (identification == "" && username == "" &&
-			emailAddress == "" && password == "")
-		{
-			alert2(title: "Avertissement!", message: "Do you want to go back to main page?")
-		}
-		if (identification == "" || username == "" ||
-			emailAddress == "" || password == "")
-		{
-			alert1(title: "Avertissement!", message: "You have to fill all form fields.", tag: 1)
-			
-			return
-		}
+		if checkUsersDatas(identification, username, emailAddress, password) == false
+		{ return }
 		//----------------------
-		
 		//--- Save on memory ---
-		userData = [identification, emailAddress, password]				//Tuple of data User
+		userData = [identification, emailAddress, password]						//Tuple of data User
 		save.saveData(theData: userData as AnyObject, fileName: username)		//Tuple save by username file
 		//----------------------
 		
@@ -97,9 +86,36 @@ class SignUp: UIViewController, UITextFieldDelegate
 		//-- Back to Sign In ---
 		alert1(title: "Accomplished!", message: "Username and password successfully created.", tag: 2)
 		//----------------------
-		
 	}
 	//================================= Functions =================================
+	//------------ Check user data ------------
+	func checkUsersDatas(_ iDNumber: String,_ username: String,_ email: String,_ password: String) -> Bool
+	{
+		if (iDNumber == "" && username == "" && email == "" && password == "")
+		{ alert2(title: "Avertissement!", message: "Do you want to go back to main page?") }
+		
+		if (iDNumber == "" || username == "" || email == "" || password == "")
+		{ alert1(title: "Avertissement!", message: "You have to fill all form fields.", tag: 1); return false }
+		
+		/* Users datas tests*/
+		if Array(iDNumber).count == 6, let _ = Int(iDNumber)		/* Concordia id tests */
+		{ }
+		else
+		{ alert2(title: "Wrong Concordia id!", message: "Your id must have 6 numbers."); return false }
+		
+		if Array(email).contains("@") == true						/* Concordia e-mail tests */
+		{ }
+		else
+		{ alert2(title: "Wrong e-mail!", message: "You must add a valid e-mail."); return false }
+		
+		if Array(password).count == 6								/* Concordia passwords tests */
+		{ }
+		else
+		{ alert2(title: "Wrong password!", message: "Your password must have 6 characters."); return false }
+		
+		return true
+	}
+	//-----------------------------------------
 	//----------- Alerts Fonctions ------------
 	func arraysToStyle()
 	{
