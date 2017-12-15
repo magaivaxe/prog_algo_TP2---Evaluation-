@@ -60,6 +60,8 @@ class SignIn: UIViewController,
 							 UIFont.init(name: "Champagne & Limousines", size: 13),
 							 UIColor.init(red: 111/255, green: 113/255, blue: 121/255, alpha: 1), 10, 0,
 							 UIColor.white.cgColor, UIColor.init(white: 1, alpha: 0).cgColor, 1)
+		
+		labelQuestion.adjustsFontSizeToFitWidth = true
 	}
 	//============================== Actions Buttons ==============================
 	@IBAction func signIn(_ sender: UIButton)

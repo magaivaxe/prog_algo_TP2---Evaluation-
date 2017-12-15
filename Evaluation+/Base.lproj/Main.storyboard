@@ -72,8 +72,8 @@
                                 <rect key="frame" x="55" y="483" width="303" height="61"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" text="New to Evaluation+?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XYt-GJ-iC0" userLabel="question_label">
-                                        <rect key="frame" x="36" y="19" width="130" height="23"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" text="New to Evaluation+?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" id="XYt-GJ-iC0" userLabel="question_label">
+                                        <rect key="frame" x="36" y="19" width="114" height="23"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="Champagne&amp;Limousines" family="Champagne &amp; Limousines" pointSize="13"/>
                                         <nil key="textColor"/>
@@ -822,7 +822,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Dur-zE-cyj"/>
+        <segue reference="H5r-2l-QWY"/>
         <segue reference="2L7-Xb-uRr"/>
         <segue reference="GC0-dW-xiI"/>
         <segue reference="bXb-Of-aYw"/>
